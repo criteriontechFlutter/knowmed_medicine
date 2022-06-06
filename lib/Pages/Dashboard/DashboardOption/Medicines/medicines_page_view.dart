@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
 import 'package:knowmed/AppManager/aimation_util.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
@@ -12,6 +11,7 @@ import 'package:knowmed/AppManager/plugin/autoAnimated/src/list.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_Data_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_Modal.dart';
 import 'package:knowmed/Pages/DiseaseAndCondition/disease.dart';
+import '../../../../AppManager/MyTextField.dart';
 import '../../../../AppManager/coloured_safe_area.dart';
 import '../../../../Widgets/NavigationDrawerWidget.dart';
 import 'medicine_Details/medicine_Details_View.dart';
@@ -46,7 +46,6 @@ class _MedicinesPageViewState extends State<MedicinesPageView> {
   void initState(){
     get();
     super.initState();
-
   }
   @override
   void dispose() {
@@ -119,92 +118,11 @@ class _MedicinesPageViewState extends State<MedicinesPageView> {
             ]),
           ),
 
-          // appBar: AppBar(
-          //   actions: [
-          //     AnimSearchBar(
-          //       width: 360,
-          //       textController: _searchC,
-          //       prefixIcon: Icon(Icons.search,color: Colors.black),
-          //       suffixIcon: Icon(Icons.search,color: Colors.black,),closeSearchOnSuffixTap: true,
-          //       onSuffixTap: () {
-          //         setState(() {
-          //           _searchC.clear();
-          //         });
-          //       },
-          //     ),
-          //     // IconButton(
-          //     //     onPressed: (){
-          //     //       setState(() {
-          //     //         isVisible =! isVisible;
-          //     //       });
-          //     //
-          //     //       print('pressed');
-          //     //     },
-          //     //     icon: const Icon(Icons.search,color: Colors.indigo,size: 30,))
-          //   ],
-          //   title: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       AnimatedContainer(
-          //         duration: Duration(milliseconds: 600),
-          //         width: isVisible == false?0:250,
-          //         child: Text('Medicine Details',
-          //             style: MyTextTheme()
-          //                 .mediumSCB
-          //                 .copyWith(color: AppColor().text_blue)),
-          //       ),
-          //       AnimatedContainer(duration: Duration(milliseconds: 600),
-          //         width: isVisible == true?0:250,
-          //         color: Colors.blue,
-          //         height: 30,
-          //       )
-          //     ],
-          //   ),
-          //
-          //   backgroundColor: AppColor().grey_header,
-          // ),
           body: GetBuilder(
             init:MedicineController(),
             builder: (_) {
               return Column(
               children: [
-               // Container(
-               //   color: AppColor().greyLight,
-               //   child: Row(
-               //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               //     children: [
-               //     Visibility(
-               //       child: Row(
-               //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               //         children: const [
-               //           SizedBox(width: 10,),
-               //           Icon(Icons.arrow_back_ios),
-               //           SizedBox(width: 20,),
-               //           Text('Medicine Details'),
-               //         ],
-               //       ),
-               //     ),
-               //       Padding(
-               //         padding: const EdgeInsets.only(left: 15.0,right: 15),
-               //         child: AnimSearchBarCustom(
-               //           rtl: true,
-               //           width: MediaQuery.of(context).size.width,
-               //           textController: modal.controller.searchC.value,
-               //           suffixIcon: Icon(Icons.close,color: Colors.black,),
-               //            closeSearchOnSuffixTap: true,
-               //           animationDurationInMilli: 1000,
-               //           prefixIcon: Icon(Icons.search,color: Colors.black,),
-               //           onSuffixTap: () {
-               //             print("hereeeeeeeeeeeee");
-               //             setState(() {
-               //               modal.controller.searchC.value.clear();
-               //             });
-               //           },
-               //         ),
-               //       ),
-               //     ],
-               //   ),
-               // ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12,10,12,8),
               child: MyCustomSD(

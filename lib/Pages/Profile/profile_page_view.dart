@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
 import 'package:knowmed/AppManager/NewTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/Pages/Profile/profileModal.dart';

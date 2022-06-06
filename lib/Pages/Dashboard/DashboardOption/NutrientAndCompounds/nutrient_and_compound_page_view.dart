@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
 import 'package:knowmed/AppManager/aimation_util.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/AppManager/coloured_safe_area.dart';
 import 'package:knowmed/AppManager/common_widgets.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
+import 'package:knowmed/AppManager/my_text_field_2.dart';
 import 'package:knowmed/AppManager/plugin/autoAnimated/src/list.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicine_Details/medicine_Details_View.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_Controller.dart';

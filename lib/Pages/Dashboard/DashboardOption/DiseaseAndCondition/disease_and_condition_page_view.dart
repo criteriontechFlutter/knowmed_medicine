@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
+import 'package:knowmed/AppManager/MyTextField.dart';
 import 'package:knowmed/AppManager/aimation_util.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';

@@ -2,17 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
 import 'package:knowmed/AppManager/NewTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/Pages/Registration/registration_Controller.dart';
 import 'package:knowmed/Pages/Registration/registration_Modal.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:slide_countdown/slide_countdown.dart';
 
 import '../../AppManager/AlertDialogueNew.dart';
 import '../../AppManager/Button.dart';

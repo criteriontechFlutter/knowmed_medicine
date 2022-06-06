@@ -33,8 +33,8 @@ class _LoginPageViewState extends State<LoginPageView>{
     Navigator.push(context, MaterialPageRoute(builder: (context){
       return const RegisterPageView();
     }));
-
   }
+
   LoginModal modal=LoginModal();
 
   @override
@@ -47,7 +47,7 @@ class _LoginPageViewState extends State<LoginPageView>{
     axisDirection: AxisDirection.down,
     child: ListView(
         children: [
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +62,7 @@ class _LoginPageViewState extends State<LoginPageView>{
           ),
           const SizedBox(height: 20,),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 Text('Good Morning !',

@@ -84,7 +84,7 @@ class _MyTextField2State extends State<MyTextField2> {
         decoration: widget.decoration??InputDecoration(
           filled: true,
           isDense: true,
-          fillColor: AppColor().greyLight,
+          fillColor: AppColor().white,
           counterText: '',
           //contentPadding: widget.isPasswordField==null? EdgeInsets.all(5):widget.isPasswordField? EdgeInsets.fromLTRB(5,5,5,5):EdgeInsets.all(5),
           contentPadding: EdgeInsets.all(12),
@@ -111,14 +111,14 @@ class _MyTextField2State extends State<MyTextField2> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(5)),
             borderSide: BorderSide(
-                color: AppColor().primaryColor,
+                color: AppColor().grey,
                 width: 1
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(5)),
             borderSide: BorderSide(
-                color: AppColor().primaryColor,
+                color: AppColor().grey,
                 width: 1
             ),
           ),

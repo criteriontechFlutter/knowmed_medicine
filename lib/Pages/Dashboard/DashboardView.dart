@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
+import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_and_condition_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/dose_calculator_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_page_view.dart';
@@ -14,6 +15,8 @@ import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../AppManager/coloured_safe_area.dart';
+import 'DashboardOption/ClinicalCalculator/clinicalCalculatorView.dart';
+import 'DashboardOption/Feedback/feedbackView.dart';
 import 'DashboardOption/Medicines/medicines_page_view.dart';
 
 
@@ -431,27 +434,33 @@ class _DashboardViewState extends State<DashboardView>{
                 height: 60,
                 width: 70,
                 child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ClipOval(
-                          child: Image(image: AssetImage('assets/clinical_calculat.png'),
-                            fit:BoxFit.cover,
-                            width: 30,
-                            height: 30,
-                          )
-                      ),
-                      Text('Clinical',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                      App().navigate(context, const ClinicalCalculator());
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const ClipOval(
+                            child: Image(image: AssetImage('assets/clinical_calculat.png'),
+                              fit:BoxFit.cover,
+                              width: 30,
+                              height: 30,
+                            )
                         ),
-                      ),
-                      Text('Calculator',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
+                        Text('Clinical',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),
                         ),
-                      )
-                    ],
+                        Text('Calculator',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -530,27 +539,32 @@ class _DashboardViewState extends State<DashboardView>{
                   height: 60,
                   width: 70,
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipOval(
-                            child: Image(image: AssetImage('assets/media_and_research.png'),
-                              fit:BoxFit.cover,
-                              width: 30,
-                              height: 30,
-                            )
-                        ),
-                        Text('Feedback &',
-                          style: MyTextTheme().smallBCN.copyWith(
-                              color: AppColor().black
+                    child: InkWell(
+                      onTap: (){
+                      App().replaceNavigate(context, FeedbackView());
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipOval(
+                              child: Image(image: AssetImage('assets/media_and_research.png'),
+                                fit:BoxFit.cover,
+                                width: 30,
+                                height: 30,
+                              )
                           ),
-                        ),
-                        Text('Suggestions',
-                          style: MyTextTheme().smallBCN.copyWith(
-                              color: AppColor().black
+                          Text('Feedback &',
+                            style: MyTextTheme().smallBCN.copyWith(
+                                color: AppColor().black
+                            ),
                           ),
-                        ),
-                      ],
+                          Text('Suggestions',
+                            style: MyTextTheme().smallBCN.copyWith(
+                                color: AppColor().black
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

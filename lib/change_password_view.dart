@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/MyTextField2.dart';
 import 'package:knowmed/AppManager/NewTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 

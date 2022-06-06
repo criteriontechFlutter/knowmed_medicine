@@ -37,10 +37,6 @@ class MedicineController extends GetxController{
 
   List medicineAlphabet = [].obs;
 
-  // List<MedicineDataModal> get getMedicineAlphabet=>List <MedicineDataModal>.from(
-  //     medicineAlphabet.map((element) => MedicineDataModal.fromJson(element))
-  // );
-
   set  updateMedicineAlphabet(List val){
     medicineAlphabet=val;
     update();
