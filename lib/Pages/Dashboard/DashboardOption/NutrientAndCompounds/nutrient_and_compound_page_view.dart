@@ -15,6 +15,7 @@ import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nut
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_Data_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_Modal.dart';
 import '../../../../Widgets/NavigationDrawerWidget.dart';
+import 'NutrientDetails/detailsView.dart';
 
 
 class NutrientAndCompoundPageView extends StatefulWidget {
@@ -253,8 +254,7 @@ class _NutrientAndCompoundPageViewState extends State<NutrientAndCompoundPageVie
                                             NutrientDataModal nutrientData=modal.controller.getNutrientAlphabet[index];
                                             return   InkWell(
                                               onTap: (){
-                                                App().navigate(context, MedicineDetails(
-                                                  index: index,
+                                                App().navigate(context, NutrientDetailsView(
                                                 ));
                                               },
                                               child: Container(
