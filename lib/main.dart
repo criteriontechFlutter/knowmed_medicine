@@ -17,6 +17,7 @@ import 'package:knowmed/FactsController.dart';
 
 import 'package:lottie/lottie.dart';
 
+import 'Pages/Dashboard/DashboardOption/Widget/widgetAlphabet.dart';
 import 'Pages/Dashboard/DashboardView.dart';
 import 'Pages/Login/login_page_view.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
             themeMode:  ThemeMode.light,
 
             home: MyHomePage(),
+            //home: AlphabetWidget(),
           );
         }
     );

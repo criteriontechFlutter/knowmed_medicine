@@ -548,6 +548,13 @@
             </list>
           </value>
         </entry>
+        <entry key="sliding_up_panel">
+          <value>
+            <list>
+              <option value="C:/flutter/.pub-cache/hosted/pub.dartlang.org/sliding_up_panel-2.0.0+1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="smooth_page_indicator">
           <value>
             <list>
@@ -751,6 +758,7 @@
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/scrollable_positioned_list-0.3.2/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shimmer-2.0.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/slide_countdown-0.2.5/lib" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/sliding_up_panel-2.0.0+1/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/smooth_page_indicator-0.3.0-nullsafety.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.2/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.2+1/lib" />

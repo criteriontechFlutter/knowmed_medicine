@@ -8,11 +8,13 @@ import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_and_condition_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/dose_calculator_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_page_view.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/interaction_checker_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_page_view.dart';
 import 'package:knowmed/Pages/DiseaseAndCondition/disease_and_condition_page_view.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../AppManager/coloured_safe_area.dart';
 import 'DashboardOption/ClinicalCalculator/clinicalCalculatorView.dart';
@@ -74,115 +76,127 @@ class _DashboardViewState extends State<DashboardView>{
         ),
         backgroundColor: AppColor().grey_header,
       ),
-      body: Container(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: Column(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            height: 300,
-                            child: Lottie.asset('assets/animated_gif.json'))
-                      ],
-                    ),
-                    SizedBox(height: 20,),
-                    Row(
+      body:
+
+      SlidingUpPanel(
+        maxHeight: 250,
+        minHeight: 80,
+        parallaxEnabled: true,
+        parallaxOffset: .5,
+        body:     Container(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: Column(
+                    children: [
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Use our',
-                            style: MyTextTheme().smallBCN.copyWith(
-                                color: AppColor().black
-                            ),),
-                          SizedBox(width: 2,),
-                          Text('Symptom Checker Tools',
-                            style: MyTextTheme().smallBCB.copyWith(
-                                color: AppColor().black
-                            ),),
-                          SizedBox(width: 2,),
-                          Text('&',
-                            style: MyTextTheme().smallBCN.copyWith(
-                                color: AppColor().black
-                            ),),
-                        ]
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('see, what could be causing your symptoms.',
-                            style: MyTextTheme().smallBCN.copyWith(
-                                color: AppColor().black
-                            ),),
-                        ]
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Then Know about',
-                            style: MyTextTheme().smallBCN.copyWith(
-                                color: AppColor().black
-                            ),),
-                          SizedBox(width: 2,),
-                          Text('possible next steps',
-                            style: MyTextTheme().smallBCB.copyWith(
-                                color: AppColor().black
-                            ),),
-                        ]
-                    ),
-                    SizedBox(height: 20,),
-                    Center(
-                      child: Container(
-                        width: 100,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: AppColor().red,
-                            borderRadius: BorderRadius.only(
-                              topLeft:Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),
-                              topRight: Radius.circular(10),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(5, 10),
-                                  blurRadius: 20,
-                                  color: Colors.grey.withOpacity(0.2)
-                              )
-                            ]
-                        ),
-                        child: Center(
-                          child: MyButton(
-                            color: AppColor().white,
-                            title: 'Start',
-                            onPress: ()=>showModalBottomSheet(
-                                enableDrag: false,
-                                isDismissible: false,
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20),
-                                    )
-                                ),
-                                context: context,
-                                builder: (context)=>buildSheet(context)
+                          SizedBox(
+                              height: 300,
+                              child: Lottie.asset('assets/animated_gif.json'))
+                        ],
+                      ),
+                      const SizedBox(height: 20,),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Use our',
+                              style: MyTextTheme().smallBCN.copyWith(
+                                  color: AppColor().black
+                              ),),
+                            const SizedBox(width: 2,),
+                            Text('Symptom Checker Tools',
+                              style: MyTextTheme().smallBCB.copyWith(
+                                  color: AppColor().black
+                              ),),
+                            const SizedBox(width: 2,),
+                            Text('&',
+                              style: MyTextTheme().smallBCN.copyWith(
+                                  color: AppColor().black
+                              ),),
+                          ]
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('see, what could be causing your symptoms.',
+                              style: MyTextTheme().smallBCN.copyWith(
+                                  color: AppColor().black
+                              ),),
+                          ]
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Then Know about',
+                              style: MyTextTheme().smallBCN.copyWith(
+                                  color: AppColor().black
+                              ),),
+                            const SizedBox(width: 2,),
+                            Text('possible next steps',
+                              style: MyTextTheme().smallBCB.copyWith(
+                                  color: AppColor().black
+                              ),),
+                          ]
+                      ),
+                      const SizedBox(height: 20,),
+                      Center(
+                        child: Container(
+                          width: 100,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              color: AppColor().red,
+                              borderRadius: const BorderRadius.only(
+                                topLeft:Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: const Offset(5, 10),
+                                    blurRadius: 20,
+                                    color: Colors.grey.withOpacity(0.2)
+                                )
+                              ]
+                          ),
+                          child: Center(
+                            child: MyButton(
+                              color: AppColor().white,
+                              title: 'Start',
                             ),
                           ),
                         ),
-                      ),
-                    )
-                  ]
+                      )
+                    ]
+                ),
               ),
-            ),
-          )
+            )
+        ),
+        panelBuilder: (sc) => buildSheet(context),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18.0),
+            topRight: Radius.circular(18.0)),
+        onPanelSlide: (double pos) => setState(() {
+          // _fabHeight = pos * (_panelHeightOpen - _panelHeightClosed) +
+          //     _initFabHeight;
+        }),
       ),
+
+
     ),
   );
 }
-  Widget buildSheet(context)=> Container(
+
+
+
+  Widget buildSheet(BuildContext context)=> Container(
+
+  decoration: BoxDecoration(
   color: Colors.white,
+    border: Border(top: BorderSide(width: 3.0, color: AppColor().primaryColor)),
+  ),
   padding: const EdgeInsets.all(8.0),
     child: Column(
       //mainAxisSize: MainAxisSize.min,
@@ -192,7 +206,7 @@ class _DashboardViewState extends State<DashboardView>{
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> DiseaseListPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const DiseaseListPageView()));
                 },
                 child:  Container(
                   height: 60,
@@ -201,7 +215,7 @@ class _DashboardViewState extends State<DashboardView>{
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ClipOval(
+                        const ClipOval(
                             child: Image(image: AssetImage('assets/disease_details.png'),
                               fit:BoxFit.cover,
                               width: 30,
@@ -223,10 +237,10 @@ class _DashboardViewState extends State<DashboardView>{
               ),
 
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> MedicinesPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const MedicinesPageView()));
                 },
                 child: Container(
                   height: 60,
@@ -234,7 +248,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: Column(
                       children: [
-                        ClipOval(
+                        const ClipOval(
                             child: Image(image: AssetImage('assets/medicine.png'),
                               fit:BoxFit.cover,
                               width: 30,
@@ -252,10 +266,10 @@ class _DashboardViewState extends State<DashboardView>{
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> FoodAndHerbPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const FoodAndHerbPageView()));
                 },
                 child: Container(
                   height: 60,
@@ -268,7 +282,7 @@ class _DashboardViewState extends State<DashboardView>{
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ClipOval(
+                            const ClipOval(
                                 child: Image(image: AssetImage('assets/food_and_nutrition.png'),
                                   fit:BoxFit.cover,
                                   width: 30,
@@ -294,10 +308,10 @@ class _DashboardViewState extends State<DashboardView>{
               ),
 
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> NutrientAndCompoundPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const NutrientAndCompoundPageView()));
                 },
                 child: Container(
                   height: 60,
@@ -306,7 +320,7 @@ class _DashboardViewState extends State<DashboardView>{
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ClipOval(
+                        const ClipOval(
                             child: Image(image: AssetImage('assets/nutrient_details.png'),
                               fit:BoxFit.cover,
                               width: 30,
@@ -331,42 +345,49 @@ class _DashboardViewState extends State<DashboardView>{
               //Expanded(child: Container()),
             ],
           ),
-          SizedBox(height: 2),
-          Divider(color: Colors.grey),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
+          const Divider(color: Colors.grey),
+          const SizedBox(height: 2),
           Row(
             children: [
               Container(
                 height: 60,
                 width: 70,
                 child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ClipOval(
-                          child: Image(image: AssetImage('assets/interaction_checker.png'),
-                            fit:BoxFit.cover,
-                            width: 30,
-                            height: 30,
-                          )
-                      ),
-                      Text('Interaction',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
-                        ),),
-                      Text('Checker',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
-                        ),),
-                    ],
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                      App().navigate(context, const InteractionCheckerPageView());
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const ClipOval(
+                            child: Image(image: AssetImage('assets/interaction_checker.png'),
+                              fit:BoxFit.cover,
+                              width: 30,
+                              height: 30,
+                            )
+                        ),
+                        Text('Interaction',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),),
+                        Text('Checker',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),),
+                      ],
+                    ),
                   ),
+
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> DoseCalculatorPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const DoseCalculatorPageView()));
                 },
                 child: Container(
                   height: 60,
@@ -374,7 +395,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: Column(
                       children: [
-                        ClipOval(
+                        const ClipOval(
                             child: Image(image: AssetImage('assets/dose_calculator.png'),
                               fit:BoxFit.cover,
                               width: 30,
@@ -397,39 +418,46 @@ class _DashboardViewState extends State<DashboardView>{
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               Center(
                 child: SizedBox(
                   height: 60,
                   width: 70,
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipOval(
-                            child: Image(image: AssetImage('assets/deficiency_checker.png'),
-                              fit:BoxFit.cover,
-                              width: 30,
-                              height: 30,
-                            )
-                        ),
-                        Text('Deficiency',
-                          style: MyTextTheme().smallBCN.copyWith(
-                              color: AppColor().black
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                        App().navigate(context, const InteractionCheckerPageView());
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const ClipOval(
+                              child: Image(image: AssetImage('assets/deficiency_checker.png'),
+                                fit:BoxFit.cover,
+                                width: 30,
+                                height: 30,
+                              )
                           ),
-                        ),
-                        Text('Checker',
-                          style: MyTextTheme().smallBCN.copyWith(
-                              color: AppColor().black
+                          Text('Deficiency',
+                            style: MyTextTheme().smallBCN.copyWith(
+                                color: AppColor().black
+                            ),
                           ),
-                        )
-                      ],
+                          Text('Checker',
+                            style: MyTextTheme().smallBCN.copyWith(
+                                color: AppColor().black
+                            ),
+                          )
+                        ],
+                      ),
                     ),
+
                   ),
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               Container(
                 height: 60,
                 width: 70,
@@ -467,9 +495,9 @@ class _DashboardViewState extends State<DashboardView>{
               //Expanded(child: Container()),
             ],
           ),
-          SizedBox(height: 2),
-          Divider(color: Colors.grey),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
+          const Divider(color: Colors.grey),
+          const SizedBox(height: 2),
           Row(
             children: [
               Container(
@@ -479,7 +507,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ClipOval(
+                      const ClipOval(
                           child: Image(image: AssetImage('assets/diet_management.png'),
                             fit:BoxFit.cover,
                             width: 30,
@@ -499,10 +527,10 @@ class _DashboardViewState extends State<DashboardView>{
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> MedicalTermPageView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const MedicalTermPageView()));
                 },
                 child:  Container(
                   height: 60,
@@ -510,7 +538,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: Column(
                       children: [
-                        ClipOval(
+                        const ClipOval(
                             child: Image(image: AssetImage('assets/medical_terminology.png'),
                               fit:BoxFit.cover,
                               width: 30,
@@ -533,7 +561,7 @@ class _DashboardViewState extends State<DashboardView>{
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               Center(
                 child: SizedBox(
                   height: 60,
@@ -541,12 +569,12 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: InkWell(
                       onTap: (){
-                      App().replaceNavigate(context, FeedbackView());
+                      App().replaceNavigate(context, const FeedbackView());
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ClipOval(
+                          const ClipOval(
                               child: Image(image: AssetImage('assets/media_and_research.png'),
                                 fit:BoxFit.cover,
                                 width: 30,
@@ -570,7 +598,7 @@ class _DashboardViewState extends State<DashboardView>{
                 ),
               ),
               //Expanded(child: Container()),
-              Container(height: 60, child: VerticalDivider(color: Colors.grey)),
+              Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               Container(
                 height: 60,
                 width: 70,
@@ -578,7 +606,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ClipOval(
+                      const ClipOval(
                           child: Image(image: AssetImage('assets/side_effect_checker.png'),
                             fit:BoxFit.cover,
                             width: 30,

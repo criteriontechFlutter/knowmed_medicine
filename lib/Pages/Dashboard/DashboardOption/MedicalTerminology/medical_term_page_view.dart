@@ -10,6 +10,7 @@ import 'package:knowmed/AppManager/coloured_safe_area.dart';
 import 'package:knowmed/AppManager/common_widgets.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
 import 'package:knowmed/AppManager/plugin/autoAnimated/src/list.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medicalTerminologyDetailsView.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_Data_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_terminology_Controller.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_terminology_Modal.dart';
@@ -228,9 +229,7 @@ class _MedicalTermPageViewState extends State<MedicalTermPageView> {
                                             MedicalTerminologyDataModal diseaseData=modal.controller.getMedicalTermAlphabet[index];
                                             return   InkWell(
                                               onTap: (){
-                                                App().navigate(context, MedicineDetails(
-                                                  index: index,
-                                                ));
+                                                MedicalTermView(context,diseaseData);
                                               },
                                               child: Container(
                                                 // height: 25,

@@ -209,6 +209,16 @@ class MyTextTheme {
       fontSize: 12,
       fontWeight: FontWeight.normal
   );
+  TextStyle smallGCN=GoogleFonts.lato(
+      color: AppColor().grey,
+      fontSize: 12,
+      fontWeight: FontWeight.normal
+  );
+  TextStyle smallBLCB=GoogleFonts.lato(
+      color: AppColor().blue_disease,
+      fontSize: 12,
+      fontWeight: FontWeight.bold
+  );
 
 
 

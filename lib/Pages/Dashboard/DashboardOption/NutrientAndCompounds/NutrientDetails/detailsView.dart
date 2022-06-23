@@ -156,43 +156,43 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                         }),
                   ),
 
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 8.0,right: 8),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       Text('hdbgvcwf'),
-                  //       Text('hdbgvcwf'),
-                  //     ],
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0,right: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('hdbgvcwf'),
+                        Text('hdbgvcwf'),
+                      ],
+                    ),
+                  ),
 
-                  // Expanded(
-                  //   child: ListView.builder(
-                  //     shrinkWrap: true,
-                  //     itemCount: abc.length,
-                  //       itemBuilder: (BuildContext context,int index){
-                  //         return Padding(
-                  //           padding: const EdgeInsets.all(8.0),
-                  //           child: Container(
-                  //             decoration: BoxDecoration(
-                  //               border: Border.all(color:AppColor().grey),
-                  //               borderRadius: BorderRadius.circular(5)
-                  //             ),
-                  //             child: Padding(
-                  //               padding: const EdgeInsets.all(8.0),
-                  //               child: Row(
-                  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //                 children: const [
-                  //                   Text("Faheem"),
-                  //                   Text("per 100 mg"),
-                  //                 ],
-                  //               )
-                  //             ),
-                  //           ),
-                  //         );
-                  //       }),
-                  // )
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: abc.length,
+                        itemBuilder: (BuildContext context,int index){
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color:AppColor().grey),
+                                borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text("Faheem"),
+                                    Text("per 100 mg"),
+                                  ],
+                                )
+                              ),
+                            ),
+                          );
+                        }),
+                  )
                 ],
               ),
             )
@@ -205,17 +205,17 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
   }
 
 
-// List abc=[
-//   {
-//     'name':'faheem',
-//   },
-//   {
-//     'name':'faheem',
-//   },
-//   {
-//     'name':'faheem',
-//   }
-//   ];
+List abc=[
+  {
+    'name':'faheem',
+  },
+  {
+    'name':'faheem',
+  },
+  {
+    'name':'faheem',
+  }
+  ];
 
 
 
