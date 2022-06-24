@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:knowmed/AppManager/AlertDialogue.dart';
 import 'package:knowmed/AppManager/UserRepository/user_data.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/AppManager/raw_api.dart';
@@ -40,18 +39,19 @@ class NutrientDetailsModal{
     }
   }
 
-  // onSecelctFoodCategory(context){
-  //
-  //   var body={
-  //     "foodGroupId":"300",
-  //       "nutrientCategoryId":"7",
-  //       "nutrientId":"2",
-  //       "pageIndex":"1",
-  //       "pageSize":"50",
-  //       "userId":"120"
-  //   };
-  //
-  //   var data=rawData.api('Knowmed/getAllFoodByNutrient', body, context,token: true);
-  //   print(data.toString()+"jjjjj");
-  // }
+  onSelectFoodCategory(context)async{
+
+    var body={
+      "foodGroupId":"300",
+        "nutrientCategoryId":"7",
+        "nutrientId":2.toString(),
+        "pageIndex":"1",
+        "pageSize":"50",
+        "userId":UserData().getUserData.id.toString(),
+    };
+
+    var data=await rawData.api('Knowmed/getAllFoodByNutrient', body, context,token: true);
+    print('--------------'+data.toString());
+    controller.updateNutrientFactList=data['responseValue'];
+  }
 }

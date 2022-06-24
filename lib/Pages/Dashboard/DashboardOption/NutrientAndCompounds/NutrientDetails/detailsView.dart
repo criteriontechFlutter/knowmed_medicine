@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/NutrientDetails/DataModal/detailsDataModal.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/NutrientDetails/DataModal/dropDownDetailsDataModal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/NutrientDetails/detailsModal.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -151,8 +152,16 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                         listToSearch: modal.controller.getNutrientSelectFilterList,
                         valFrom: 'groupname',
                         hideSearch: true,
+
                         onChanged: (val)async{
-                       // await modal.onSecelctFoodCategory(context);
+
+                          await modal.onSelectFoodCategory(context);
+
+                          // if(val!=null){
+                          //   modal.controller.updateRIndex=val['rIndex'];
+                          // }
+
+
                         }),
                   ),
 
@@ -160,9 +169,9 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                     padding: const EdgeInsets.only(left: 8.0,right: 8),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('hdbgvcwf'),
-                        Text('hdbgvcwf'),
+                      children:  [
+                        Text('Food List',style: MyTextTheme().smallBCN,),
+                        Text('per 100 g',style: MyTextTheme().smallBCN),
                       ],
                     ),
                   ),
@@ -170,8 +179,9 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                   Expanded(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: abc.length,
+                      itemCount: modal.controller.nutrientFactList.length,
                         itemBuilder: (BuildContext context,int index){
+                          DropDownNutrientFactDetailsDataModal nutrientFactData=modal.controller.getNutrientFactList[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
@@ -183,9 +193,14 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    Text("Faheem"),
-                                    Text("per 100 mg"),
+                                  children:  [
+                                    Expanded(child: Text(nutrientFactData.foodName.toString(),style: MyTextTheme().smallPCN.copyWith(color: AppColor().blue))),
+                                    Row(
+                                      children: [
+                                        Text(nutrientFactData.nutrientValue.toString(),style: MyTextTheme().smallPCN.copyWith(color: AppColor().orange),),
+                                        Text(' '+nutrientFactData.unit.toString(),style: MyTextTheme().smallPCN.copyWith(color: AppColor().orange),)
+                                      ],
+                                    )
                                   ],
                                 )
                               ),

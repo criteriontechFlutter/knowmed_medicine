@@ -1,13 +1,13 @@
-class DropDownDetailsDataModal {
+class DropDownNutrientFactDetailsDataModal {
   int? rIndex;
   int? foodId;
   String? foodName;
-  int? nutrientValue;
+  double? nutrientValue;
   String? groupName;
   String? unit;
   int? total;
 
-  DropDownDetailsDataModal(
+  DropDownNutrientFactDetailsDataModal(
       {
         this.rIndex,
         this.foodId,
@@ -18,7 +18,7 @@ class DropDownDetailsDataModal {
         this.total
       });
 
-  DropDownDetailsDataModal.fromJson(Map<String, dynamic> json) {
+  DropDownNutrientFactDetailsDataModal.fromJson(Map<String, dynamic> json) {
     rIndex = json['rIndex'];
     foodId = json['foodId'];
     foodName = json['foodName'];
