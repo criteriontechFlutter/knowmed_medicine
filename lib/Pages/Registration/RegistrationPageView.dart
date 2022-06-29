@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/NewTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
+import 'package:knowmed/AppManager/appUtils.dart';
+import 'package:knowmed/AppManager/web_view.dart';
 import 'package:knowmed/Pages/Registration/registration_Controller.dart';
 import 'package:knowmed/Pages/Registration/registration_Modal.dart';
 
@@ -219,6 +220,58 @@ class _RegisterPageViewState extends State<RegisterPageView>{
 
                         },
                       ),
+                    ),
+
+
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: ()   {
+
+                            if(modal.controller.getIsReadTerms==true){
+                              modal.controller
+                                  .updateCheckBoxValue =
+                                  modal.controller
+                                      .getCheckBoxValue;
+                            }
+                            else
+                            {
+                              alertToast(context, 'Please First Read Terms and Conditions ');
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,5,8,5,),
+                            child: SizedBox(
+                              child:
+                              modal.controller.getCheckBoxValue?
+                              Icon(Icons.check_box,color: AppColor().blue,)
+                                  :Icon(Icons.check_box_outline_blank),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'I have read and agree to the',
+                              style: MyTextTheme().smallBCB,
+                            ),
+                            InkWell(
+                              onTap: (){
+                                modal.controller.updateIsReadTerms=true;
+                                App().navigate(context,  const WebViewPage(title: 'Terms and Conditions',url: 'https://digidoctor.in/Home/TermsCondition#:~:text=The%20DigiDoctor%20App%20assumes%20no,on%20duty%20on%20OPD%20days.',));
+
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(3,5,5,5),
+                                child: Text(
+                                  'Term & Condition',
+                                  style: MyTextTheme().smallPCB,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
 
                     Column(

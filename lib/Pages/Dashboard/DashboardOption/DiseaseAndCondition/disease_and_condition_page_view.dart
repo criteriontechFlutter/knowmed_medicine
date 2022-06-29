@@ -148,15 +148,23 @@ class _DiseaseListPageViewState extends State<DiseaseListPageView> {
 
                       }
                     },
-                    rightCornerList: RightCornerLIstView(
-                      onTap: (DiseaseDataModal val,int index){
-                        App().navigate(context, DiseaseDetails(
-                          index: index,
-                        )
-                        );
-                      },
-                      dataList: modal.controller.getDiseaseAlphabet,
-                      parameter: "problemName",
+                    rightCornerList: CommonWidgets().showNoData(
+                      title: 'Medicine List Data Not Found',
+                      show: (modal.controller.getShowNoData &&
+                          modal.controller.getDiseaseAlphabet.isEmpty),
+                      loaderTitle: 'Loading Medicine List',
+                      showLoader: (!modal.controller.getShowNoData &&
+                          modal.controller.getDiseaseAlphabet.isEmpty),
+                      child: RightCornerLIstView(
+                        onTap: (DiseaseDataModal val,int index){
+                          App().navigate(context, DiseaseDetails(
+                            index: index,
+                          )
+                          );
+                        },
+                        dataList: modal.controller.getDiseaseAlphabet,
+                        parameter: "problemName",
+                      ),
                     ),
                     selectedAlphabet: modal.controller.alpha,
                     filterList: modal.controller.getFilterList,

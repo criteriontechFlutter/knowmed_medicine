@@ -176,14 +176,22 @@ class _MedicinesPageViewState extends State<MedicinesPageView> {
 
                       }
                     },
-                    rightCornerList: RightCornerLIstView(
-                      onTap: (MedicineDataModal val,int index){
-                        App().navigate(context, MedicineDetails(
-                          index: index,
-                        ));
-                      },
-                      dataList: modal.controller.getMedicineAlphabet,
-                      parameter: "medicineName",
+                    rightCornerList: CommonWidgets().showNoData(
+                      title: 'Medicine List Data Not Found',
+                      show: (modal.controller.getShowNoData &&
+                          modal.controller.getMedicineAlphabet.isEmpty),
+                      loaderTitle: 'Loading Medicine List',
+                      showLoader: (!modal.controller.getShowNoData &&
+                          modal.controller.getMedicineAlphabet.isEmpty),
+                      child: RightCornerLIstView(
+                        onTap: (MedicineDataModal val,int index){
+                          App().navigate(context, MedicineDetails(
+                            index: index,
+                          ));
+                        },
+                        dataList: modal.controller.getMedicineAlphabet,
+                        parameter: "medicineName",
+                      ),
                     ),
                     selectedAlphabet: modal.controller.alpha,
                     filterList: modal.controller.getFilterList,

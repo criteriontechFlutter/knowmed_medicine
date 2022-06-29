@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
@@ -10,16 +9,15 @@ import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/dose_calc
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/interaction_checker_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_page_view.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_page_view.dart';
-import 'package:knowmed/Pages/DiseaseAndCondition/disease_and_condition_page_view.dart';
+import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerView.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 import '../../AppManager/coloured_safe_area.dart';
 import 'DashboardOption/ClinicalCalculator/clinicalCalculatorView.dart';
 import 'DashboardOption/Feedback/feedbackView.dart';
-import 'DashboardOption/Medicines/medicines_page_view.dart';
 
 
 
@@ -148,23 +146,26 @@ class _DashboardViewState extends State<DashboardView>{
                           decoration: BoxDecoration(
                               color: AppColor().red,
                               borderRadius: const BorderRadius.only(
-                                topLeft:Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10),
-                                topRight: Radius.circular(10),
+                                topLeft:Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                bottomRight: Radius.circular(5),
+                                topRight: Radius.circular(5),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: const Offset(5, 10),
-                                    blurRadius: 20,
-                                    color: Colors.grey.withOpacity(0.2)
-                                )
-                              ]
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //       offset: const Offset(5, 10),
+                              //       blurRadius: 20,
+                              //       color: Colors.grey.withOpacity(0.2)
+                              //   )
+                              // ]
                           ),
                           child: Center(
                             child: MyButton(
                               color: AppColor().white,
                               title: 'Start',
+                              onPress: (){
+                                App().navigate(context, const SymptomCheckerView());
+                              },
                             ),
                           ),
                         ),
@@ -175,7 +176,7 @@ class _DashboardViewState extends State<DashboardView>{
             )
         ),
         panelBuilder: (sc) => buildSheet(context),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(18.0),
             topRight: Radius.circular(18.0)),
         onPanelSlide: (double pos) => setState(() {
@@ -206,7 +207,7 @@ class _DashboardViewState extends State<DashboardView>{
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const DiseaseListPageView()));
+                  App().navigate(context, const DiseaseListPageView());
                 },
                 child:  Container(
                   height: 60,
@@ -240,7 +241,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const MedicinesPageView()));
+                 App().navigate(context, const MedicinesPageView());
                 },
                 child: Container(
                   height: 60,
@@ -269,7 +270,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const FoodAndHerbPageView()));
+                  App().navigate(context, const FoodAndHerbPageView());
                 },
                 child: Container(
                   height: 60,
@@ -311,7 +312,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const NutrientAndCompoundPageView()));
+                  App().navigate(context, const NutrientAndCompoundPageView());
                 },
                 child: Container(
                   height: 60,
@@ -356,7 +357,6 @@ class _DashboardViewState extends State<DashboardView>{
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.pop(context);
                       App().navigate(context, const InteractionCheckerPageView());
                     },
                     child: Column(
@@ -387,7 +387,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const DoseCalculatorPageView()));
+                  App().navigate(context, const DoseCalculatorPageView());
                 },
                 child: Container(
                   height: 60,
@@ -426,7 +426,6 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: InkWell(
                       onTap: (){
-                        Navigator.pop(context);
                         App().navigate(context, const InteractionCheckerPageView());
                       },
                       child: Column(
@@ -464,7 +463,6 @@ class _DashboardViewState extends State<DashboardView>{
                 child: Center(
                   child: InkWell(
                     onTap: (){
-                      Navigator.pop(context);
                       App().navigate(context, const ClinicalCalculator());
                     },
                     child: Column(
@@ -530,7 +528,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context)=> const MedicalTermPageView()));
+                  App().navigate(context, const MedicalTermPageView());
                 },
                 child:  Container(
                   height: 60,
@@ -569,7 +567,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: InkWell(
                       onTap: (){
-                      App().replaceNavigate(context, const FeedbackView());
+                      App().navigate(context, const FeedbackView());
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

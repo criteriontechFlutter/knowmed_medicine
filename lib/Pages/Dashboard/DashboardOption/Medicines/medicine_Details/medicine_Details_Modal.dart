@@ -15,6 +15,7 @@ class MedicineDetailsModal{
   RawData rawData=RawData();
 
   medicineDetails(context, int index)async{
+    controller.updateShowNoData=false;
 
     var body={
       "medicineId":controller2.getMedicineAlphabet[index].id.toString(),
@@ -22,6 +23,7 @@ class MedicineDetailsModal{
     };
 
     var data=await rawData.api('Knowmed/medicineReport', body, context);
+    controller.updateShowNoData=true;
     log('qqqqqqqqqqqqqqqqqqqqqqqqqq'+data.toString());
     controller.updateMedicineDetailsList=data['responseValue'];
   }

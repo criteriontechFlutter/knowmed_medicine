@@ -6,6 +6,7 @@ import 'package:knowmed/AppManager/MyTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/AppManager/coloured_safe_area.dart';
+import 'package:knowmed/AppManager/common_widgets.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_And_Herb_Controller.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicine_Details/medicine_Details_View.dart';
@@ -141,14 +142,22 @@ class _FoodAndHerbPageViewState extends State<FoodAndHerbPageView> {
 
                   }
                 },
-                rightCornerList: RightCornerLIstView(
-                  onTap: (MedicineDataModal val,int index){
-                    App().navigate(context, MedicineDetails(
-                      index: index,
-                    ));
-                  },
-                  dataList: modal.controller.getFoodAlphabet,
-                  parameter: "foodName",
+                rightCornerList: CommonWidgets().showNoData(
+                  title: 'Medicine List Data Not Found',
+                  show: (modal.controller.getShowNoData &&
+                      modal.controller.getFoodAlphabet.isEmpty),
+                  loaderTitle: 'Loading Medicine List',
+                  showLoader: (!modal.controller.getShowNoData &&
+                      modal.controller.getFoodAlphabet.isEmpty),
+                  child: RightCornerLIstView(
+                    onTap: (MedicineDataModal val,int index){
+                      App().navigate(context, MedicineDetails(
+                        index: index,
+                      ));
+                    },
+                    dataList: modal.controller.getFoodAlphabet,
+                    parameter: "foodName",
+                  ),
                 ),
                 selectedAlphabet: modal.controller.alpha,
                 filterList: modal.controller.getFilterList,

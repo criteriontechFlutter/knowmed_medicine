@@ -24,6 +24,13 @@ class InteractionCheckerController extends GetxController{
   }
 
 
+  RxBool showNoData=false.obs;
+  bool get getShowNoData=>(showNoData.value);
+  set updateShowNoData(bool val){
+    showNoData.value=val;
+    update();
+  }
+
  void onTapTest(Map val){
     getAllMedicineList.clear();
     medicineC.value.text=val['medicineName'].toString();

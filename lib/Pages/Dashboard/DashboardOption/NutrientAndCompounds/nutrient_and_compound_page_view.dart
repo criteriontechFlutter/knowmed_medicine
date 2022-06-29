@@ -146,13 +146,21 @@ class _NutrientAndCompoundPageViewState extends State<NutrientAndCompoundPageVie
 
                   }
                 },
-                rightCornerList: RightCornerLIstView(
-                  onTap: (NutrientDataModal val,int index){
-                    App().navigate(context, const NutrientDetailsView(
-                    ));
-                  },
-                  dataList: modal.controller.getNutrientAlphabet,
-                  parameter: "nutrientName",
+                rightCornerList: CommonWidgets().showNoData(
+                  title: 'Medicine List Data Not Found',
+                  show: (modal.controller.getShowNoData &&
+                      modal.controller.getNutrientAlphabet.isEmpty),
+                  loaderTitle: 'Loading Medicine List',
+                  showLoader: (!modal.controller.getShowNoData &&
+                      modal.controller.getNutrientAlphabet.isEmpty),
+                  child: RightCornerLIstView(
+                    onTap: (NutrientDataModal val,int index){
+                      App().navigate(context, const NutrientDetailsView(
+                      ));
+                    },
+                    dataList: modal.controller.getNutrientAlphabet,
+                    parameter: "nutrientName",
+                  ),
                 ),
                 selectedAlphabet: modal.controller.alpha,
                 filterList: modal.controller.getFilterList,
