@@ -11,6 +11,7 @@ import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/inter
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_page_view.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/SideEffectChecker/sideeffect_checker_page_view.dart';
 import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerView.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
@@ -597,31 +598,36 @@ class _DashboardViewState extends State<DashboardView>{
               ),
               //Expanded(child: Container()),
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
-              Container(
-                height: 60,
-                width: 70,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const ClipOval(
-                          child: Image(image: AssetImage('assets/side_effect_checker.png'),
-                            fit:BoxFit.cover,
-                            width: 30,
-                            height: 30,
-                          )
-                      ),
-                      Text('Side Effect',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
+              InkWell(
+                onTap: (){
+                  App().navigate(context, const SideEffectCheckerPageView());
+                },
+                child: Container(
+                  height: 60,
+                  width: 70,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const ClipOval(
+                            child: Image(image: AssetImage('assets/side_effect_checker.png'),
+                              fit:BoxFit.cover,
+                              width: 30,
+                              height: 30,
+                            )
                         ),
-                      ),
-                      Text('Checker',
-                        style: MyTextTheme().smallBCN.copyWith(
-                            color: AppColor().black
+                        Text('Side Effect',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),
                         ),
-                      ),
-                    ],
+                        Text('Checker',
+                          style: MyTextTheme().smallBCN.copyWith(
+                              color: AppColor().black
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

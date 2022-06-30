@@ -197,7 +197,7 @@ class _RegisterPageViewState extends State<RegisterPageView>{
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10,bottom: 5),
                       child: NewTextField(
                         controller: modal.controller.mobileC.value,
                         hintText: 'Mobile No.',
