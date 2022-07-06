@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:knowmed/AppManager/Button.dart';
@@ -7,8 +6,10 @@ import 'package:knowmed/AppManager/MyTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/coloured_safe_area.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
+import 'package:knowmed/Pages/Symptom%20Checker/animation.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 
+import '../../AppManager/appUtils.dart';
 import 'symptomCheckerController.dart';
 import 'symptomCheckerModal.dart';
 
@@ -25,6 +26,12 @@ class _SymptomCheckerViewState extends State<SymptomCheckerView> {
 
   String cache='Metric';
   String gender="male";
+
+  @override
+  void dispose() {
+    Get.delete<SymptomCheckerController>();
+    super.dispose();
+  }
 
 
 
@@ -297,10 +304,16 @@ class _SymptomCheckerViewState extends State<SymptomCheckerView> {
                             hintText: "kg",
                             controller: modal.controller.kgC.value,
                             keyboardType: TextInputType.number,
+                            onChanged: (val)async{
+                              await modal.controller.metricFormula(context);
+                            },
                           ): MyTextField2(
                             hintText: "lbs",
                             controller: modal.controller.lbsC.value,
                             keyboardType: TextInputType.number,
+                            onChanged: (val)async{
+                              await modal.controller.imperialFormula(context);
+                            },
                           ),
                         ),
                         Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/451px-Person_icon_BLACK-01.svg.png',scale: 11,),
@@ -459,7 +472,10 @@ class _SymptomCheckerViewState extends State<SymptomCheckerView> {
 
 
 
-                        Text("BMI:9.152*********"+modal.controller.bmi.toString(),style: MyTextTheme().mediumBCB)
+                        Text("BMI: "+modal.controller.bmi.toStringAsFixed(3),style: MyTextTheme().mediumBCB),
+
+
+
                       ],
                     ),
                   )),
@@ -499,8 +515,8 @@ class _SymptomCheckerViewState extends State<SymptomCheckerView> {
                                   color: AppColor().white,
                                   title: 'Clear',
                                   onPress: ()async{
-                                    await modal.controller.func(context);
                                     //await modal.onPressedLogin(context);
+
                                   },
                                 ),
                               ),
@@ -531,7 +547,7 @@ class _SymptomCheckerViewState extends State<SymptomCheckerView> {
                                   color: AppColor().white,
                                   title: 'Proceed',
                                   onPress: ()async{
-                                    //await showAlert(context);
+                                    await showAlert(context,);
                                   },
 
 
@@ -596,61 +612,68 @@ showAlert(BuildContext context) {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(child: Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/451px-Person_icon_BLACK-01.svg.png',scale: 2,color: AppColor().orange,)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child:Image.asset("assets/anim_image.png",scale: 8,color: AppColor().orange,),
+                      ),
 
-                   Divider(
-                     thickness: 1,
-                     color: AppColor().red,
-                   ),
-                   Padding(
-                     padding: const EdgeInsets.only(right: 20.0,bottom: 10),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                         Text('Do you have symptom related related to ',style: MyTextTheme().smallBCN,),
-                         Text('Specific body part?',style: MyTextTheme().smallBCB,),
-                         const SizedBox(height: 10,),
-                         Row(
-                           children: [
-                             Container(
-                                 width:60,
-                                 decoration: BoxDecoration(
-                                   color:Colors.blue,
-                                   borderRadius: BorderRadius.circular(20)
-
-                                 ),
-                                 child: const MyButton(title:'Yes',
-                                 //App().navigate(context, route)
-                                 )),
-                             Padding(
-                               padding: const EdgeInsets.only(left: 12.0,),
-                               child: Container(
+                     Divider(
+                       thickness: 5,
+                       color: AppColor().red,
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(right: 20.0,bottom: 10,left: 10),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text('Do you have symptom related related to ',style: MyTextTheme().smallBCN,),
+                           Text('Specific body part?',style: MyTextTheme().smallBCB,),
+                           const SizedBox(height: 10,),
+                           Row(
+                             children: [
+                               Container(
                                    width:60,
                                    decoration: BoxDecoration(
-                                     color:Colors.red,
+                                     color:Colors.blue,
                                      borderRadius: BorderRadius.circular(20)
 
                                    ),
-                                   child:  MyButton(title: 'No',
-                                   onPress: (){
-                                     Navigator.pop(context);
-                                   },)),
-                             ),
-                           ],
-                         ),
+                                   child:  MyButton(title:'Yes',
+                                     onPress: (){
+                                       App().navigate(context, const MealPlan());
+                                     },
+                                   )),
+                               Padding(
+                                 padding: const EdgeInsets.only(left: 12.0,),
+                                 child: Container(
+                                     width:60,
+                                     decoration: BoxDecoration(
+                                       color:Colors.red,
+                                       borderRadius: BorderRadius.circular(20)
+
+                                     ),
+                                     child:  MyButton(title: 'No',
+                                     onPress: (){
+                                       Navigator.pop(context);
+                                     },)),
+                               ),
+                             ],
+                           ),
 
 
 
 
 
-                       ],
+                         ],
+                       ),
                      ),
-                   ),
 
-                  ],
+                    ],
+                  ),
                 ),
 
 

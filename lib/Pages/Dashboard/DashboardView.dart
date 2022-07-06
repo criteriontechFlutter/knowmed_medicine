@@ -4,14 +4,14 @@ import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/DeficiencyChecker/deficiency_checker_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_and_condition_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/dose_calculator_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_page_view.dart';
-import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/interaction_checker_page_view.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/new/interaction_checker_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_page_view.dart';
-import 'package:knowmed/Pages/Dashboard/DashboardOption/SideEffectChecker/sideeffect_checker_page_view.dart';
 import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerView.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
@@ -82,8 +82,9 @@ class _DashboardViewState extends State<DashboardView>{
         minHeight: 80,
         parallaxEnabled: true,
         parallaxOffset: .5,
-        body:     Container(
-            child: Center(
+        body:     ListView(
+          children: [
+            Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Column(
@@ -145,20 +146,20 @@ class _DashboardViewState extends State<DashboardView>{
                           width: 100,
                           height: 40,
                           decoration: BoxDecoration(
-                              color: AppColor().red,
-                              borderRadius: const BorderRadius.only(
-                                topLeft:Radius.circular(5),
-                                bottomLeft: Radius.circular(5),
-                                bottomRight: Radius.circular(5),
-                                topRight: Radius.circular(5),
-                              ),
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //       offset: const Offset(5, 10),
-                              //       blurRadius: 20,
-                              //       color: Colors.grey.withOpacity(0.2)
-                              //   )
-                              // ]
+                            color: AppColor().red,
+                            borderRadius: const BorderRadius.only(
+                              topLeft:Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                              topRight: Radius.circular(5),
+                            ),
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //       offset: const Offset(5, 10),
+                            //       blurRadius: 20,
+                            //       color: Colors.grey.withOpacity(0.2)
+                            //   )
+                            // ]
                           ),
                           child: Center(
                             child: MyButton(
@@ -170,11 +171,13 @@ class _DashboardViewState extends State<DashboardView>{
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(height: 200,)
                     ]
                 ),
               ),
             )
+          ] ,
         ),
         panelBuilder: (sc) => buildSheet(context),
         borderRadius: const BorderRadius.only(
@@ -427,7 +430,7 @@ class _DashboardViewState extends State<DashboardView>{
                   child: Center(
                     child: InkWell(
                       onTap: (){
-                        App().navigate(context, const InteractionCheckerPageView());
+                       App().navigate(context, const DeficencyCheckerPageView());
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -600,7 +603,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: (){
-                  App().navigate(context, const SideEffectCheckerPageView());
+                  //App().navigate(context, const SideeffectCheckerPageView());
                 },
                 child: Container(
                   height: 60,

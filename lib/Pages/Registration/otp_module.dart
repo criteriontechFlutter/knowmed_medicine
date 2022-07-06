@@ -13,8 +13,6 @@ import 'package:slide_countdown/slide_countdown.dart';
 showOTPModule(BuildContext context) {
 
   RegistrationModal modal=RegistrationModal();
-  //RegistrationModal modal=RegistrationModal();
-  // set up the AlertDialog
 
   // show the dialog
   return showDialog(
@@ -23,10 +21,6 @@ showOTPModule(BuildContext context) {
       return StatefulBuilder(
           builder: (context, snapshot) {
             return AlertDialog(
-              // contentPadding: EdgeInsets.zero,
-              // actionsPadding: EdgeInsets.zero,
-              // buttonPadding: EdgeInsets.zero,
-              // insetPadding: EdgeInsets.zero,
               titlePadding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)

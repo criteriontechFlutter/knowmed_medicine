@@ -1,3 +1,6 @@
+
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,9 +21,27 @@ class SymptomCheckerController extends GetxController{
     update();
   }
   double bmi=0.0;
-  func(context)async{
-     bmi=(double.parse(kgC.value.text)/(double.parse(heightC.value.text)*double.parse(heightC.value.text)))/10000;
+  metricFormula(context)async{
+
+     bmi=(int.parse(kgC.value.text)/(int.parse(heightC.value.text)/100.0*int.parse(heightC.value.text)/100.0));
+     print(bmi.toStringAsFixed(2));
      update();
+  }
+
+//  double imperial=0.0;
+  imperialFormula(context)async{
+    
+    var heightFeet=int.parse(fitC.value.text).toDouble();
+    var heightInch=int.parse(inchC.value.text).toDouble();
+    var weightlbs=int.parse(lbsC.value.text).toDouble();
+
+    var inches=(heightFeet*12.toInt())+heightInch.toInt();
+
+    bmi=((weightlbs/(inches*inches))*703).toDouble();
+    print(bmi.toDouble());
+    update();
+
+
   }
 
 
@@ -44,4 +65,11 @@ class SymptomCheckerController extends GetxController{
       "name":'Week'
     },
   ];
+
+
+
+
+
+
+
 }

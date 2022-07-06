@@ -81,7 +81,7 @@ class _RegisterPageViewState extends State<RegisterPageView>{
                       ],
                     ),
                   ),
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   child: Column(
                     //crossAxisAlignment: CrossAxisAlignment.start,
