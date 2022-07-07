@@ -39,7 +39,7 @@ class FeedbackModal{
     if(data['responseCode']==1){
       print('++++++'+data.toString());
       alertToast(context, 'Submitted Succesfully');
-      app.replaceNavigate(context, DashboardView());
+      app.replaceNavigate(context, const DashboardView());
     }else{
       alertToast(context, data['responseValue']);
     }

@@ -6,12 +6,13 @@
 import 'package:flutter/material.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/Pages/Symptom%20Checker/Widget/sideAnimationWidget.dart';
+import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerModal.dart';
 
 class SelectBodyPartWidget extends StatelessWidget {
 
 
   final BodyPart selectedBodyPart;
-  final Function(BodyPart val) onTapBodyPart;
+  final Function(BodyPart val,String id) onTapBodyPart;
 
     SelectBodyPartWidget({Key? key,
     this.selectedBodyPart=BodyPart.notSelected,
@@ -75,7 +76,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                   Expanded(child: Container()),
                   Expanded(child: InkWell(
                     onTap: (){
-                     onTapBodyPart(BodyPart.head);
+                     onTapBodyPart(BodyPart.head,'1');
                     },
                     child: Container(decoration: BoxDecoration(
                         color: Colors.transparent,
@@ -92,7 +93,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                     flex: 1,
                     child: InkWell(
                       onTap: (){
-                        onTapBodyPart(BodyPart.leftHand);
+                        onTapBodyPart(BodyPart.leftHand,'4');
                       },
                       child: Container(decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -108,7 +109,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                           flex: 4,
                           child: InkWell(
                             onTap: (){
-                              onTapBodyPart(BodyPart.chest);
+                              onTapBodyPart(BodyPart.chest,'2');
                             },
                             child: Container(decoration: BoxDecoration(
                                 color: Colors.transparent,
@@ -119,7 +120,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                           flex: 5,
                           child: InkWell(
                             onTap: (){
-                              onTapBodyPart(BodyPart.stomach);
+                              onTapBodyPart(BodyPart.stomach,'3');
                             },
                             child: Container(decoration: BoxDecoration(
                                 color: Colors.transparent,
@@ -137,7 +138,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                     flex: 1,
                     child: InkWell(
                       onTap: (){
-                        onTapBodyPart(BodyPart.rightHand);
+                        onTapBodyPart(BodyPart.rightHand,'4');
                       },
                       child: Container(decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -154,7 +155,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                   ),Expanded(
                     child: InkWell(
                       onTap: (){
-                        onTapBodyPart(BodyPart.leftLeg);
+                        onTapBodyPart(BodyPart.leftLeg,'5');
                       },
                       child: Container(decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -164,7 +165,7 @@ class SelectBodyPartWidget extends StatelessWidget {
                   ),Expanded(
                     child: InkWell(
                       onTap: (){
-                        onTapBodyPart(BodyPart.rightLeg);
+                        onTapBodyPart(BodyPart.rightLeg,'5');
                       },
                       child: Container(decoration: BoxDecoration(
                           color: Colors.transparent,
@@ -180,6 +181,24 @@ class SelectBodyPartWidget extends StatelessWidget {
             ],),
           )),
           SideAnimationPart(selectedBodyPart: selectedBodyPart,onTapBodyPart: onTapBodyPart,),
+
+
+
+          Positioned(
+            bottom: 15,
+            right: 15,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FloatingActionButton(
+                    child: Icon(Icons.arrow_forward),
+                    onPressed: (){
+                      print('faheem');
+                    }),
+              ),
+            ),
+          )
         ],
       ),
 

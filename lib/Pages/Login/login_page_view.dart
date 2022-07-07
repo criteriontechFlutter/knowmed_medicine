@@ -4,7 +4,6 @@ import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/NewTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
-import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/AppManager/coloured_safe_area.dart';
 import 'package:knowmed/Pages/Login/login_Modal.dart';
 

@@ -13,11 +13,15 @@ class SymptomCheckerModal{
   RawData rawData=RawData();
   App app=App();
 
-  // onClickAnimation(context){
-  //
-  //   var body={};
-  //
-  //   var data=rawData.api(url, body, context);
-  // }
+  onClickAnimation(context)async{
+
+    var body={
+      "bodyRegionId": controller.getSelectedId.toString()
+    };
+
+    var data=await rawData.api('Knowmed/getBodyOrganRegion', body, context,token: true);
+    controller.updateBodyOrganRegionList=data['responseValue'];
+    print('00000000000000000000000000'+data.toString());
+  }
 
 }

@@ -6,6 +6,7 @@ import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/Pages/Symptom%20Checker/Widget/select_body_part_widget.dart';
 
 import '../../AppManager/coloured_safe_area.dart';
+import 'symptomCheckerModal.dart';
 
 class MealPlan extends StatefulWidget {
   const MealPlan({Key? key}) : super(key: key);
@@ -15,13 +16,29 @@ class MealPlan extends StatefulWidget {
 }
 
 class _MealPlanState extends State<MealPlan> {
+
+  SymptomCheckerModal modal=SymptomCheckerModal();
+
+
+
+
+
   PageController controller = PageController();
 
 BodyPart selectedBodyPart =BodyPart.notSelected;
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    get();
+  }
+  get()async{
+
   }
 
   @override
@@ -31,12 +48,17 @@ BodyPart selectedBodyPart =BodyPart.notSelected;
     List<Widget> _list = <Widget>[
       SelectBodyPartWidget(
         selectedBodyPart: selectedBodyPart,
-        onTapBodyPart: (BodyPart val){
+        onTapBodyPart: (BodyPart val,String id) async {
           print(val.toString());
+          print('nkjghdfhgkjhfgk'+id.toString());
           selectedBodyPart=val;
           setState(() {
 
           });
+          modal.controller.updateSelectedId=id.toString();
+
+          await modal.onClickAnimation(context);
+
         },
       ),
       ageWidget(),
@@ -69,6 +91,8 @@ BodyPart selectedBodyPart =BodyPart.notSelected;
                 },
               ),
             ),
+
+
           ],
         ),
       ),

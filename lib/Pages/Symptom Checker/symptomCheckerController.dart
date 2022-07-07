@@ -67,6 +67,20 @@ class SymptomCheckerController extends GetxController{
   ];
 
 
+  RxString selectedId =''.obs;
+  String get getSelectedId=>selectedId.value;
+  set updateSelectedId(String val){
+    selectedId.value=val;
+    update();
+  }
+
+  List bodyOrganRegion=[].obs;
+  List get getBodyOrganRegionList =>bodyOrganRegion;
+  set updateBodyOrganRegionList(List val){
+    bodyOrganRegion=val;
+    update();
+  }
+
 
 
 
