@@ -34,30 +34,50 @@ class _SideAnimationPartState extends State<SideAnimationPart> {
   // }
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: SymptomCheckerController(),
-      builder: (_) {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: modal.controller.getBodyOrganRegionList.length,
-            itemBuilder: (BuildContext context, int index){
-             // SymptomCheckerDataModal organImage=modal.controller.getBodyOrganRegionList[index];
-              return AnimatedPositioned(
+    return AnimatedPositioned(
+      top: 0,
+      bottom: 0,
+      left:widget.selectedBodyPart!=BodyPart.notSelected?-250:-370,
+      right: 0,
+      duration:Duration(milliseconds: 1000),
+      child: Center(
+        child: GetBuilder(
+          init: SymptomCheckerController(),
+          builder: (_) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: modal.controller.getBodyOrganRegionList.length,
+                itemBuilder: (BuildContext context, int index){
+                 // SymptomCheckerDataModal organImage=modal.controller.getBodyOrganRegionList[index];
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        (modal.controller.getBodyOrganRegionList[index]['organImagePath']!=null&&modal.controller.getBodyOrganRegionList[index]['organImagePath']!='')? InkWell(
+                          onTap: ()async{
+                            modal.controller.updateSelectSymptomId = modal.controller.getBodyOrganRegionList[index]['id'].toString();
+                            print("######"+modal.controller.getSelectSymptomId.toString());
+                            // setState(() {
+                            //
+                            // });
+                            // modal.controller.updateSelectSymptomId=id.toString();
+                           //await modal.onSymptomsClick(context);
+                          },
+                          child: Image.asset("assets/symptoms_image/${ modal.controller.getBodyOrganRegionList[index]['organImagePath'].toString()}.png",scale: 3,
+                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                              return SizedBox();
+                            },),
+                        ):SizedBox(),
+                        SizedBox(height: 5,),
 
-                  left: widget.selectedBodyPart!=BodyPart.notSelected?60:-300,top:200,
-                  child:  Column(
-                    children: [
-                      (modal.controller.getBodyOrganRegionList[index]['organImagePath']!=null&&modal.controller.getBodyOrganRegionList[index]['organImagePath']!='')? Image.asset("assets/symptoms_image/${ modal.controller.getBodyOrganRegionList[index]['organImagePath'].toString()}.png",scale: 3,
-                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                          return const SizedBox();
-                        },):const SizedBox(),
-                      const SizedBox(height: 5,),
 
-
-                    ],
-                  ), duration:const Duration(milliseconds: 500));
-            });
-      }
+                      ],
+                    ),
+                  );
+                });
+          }
+        ),
+      ),
     );
   }
 

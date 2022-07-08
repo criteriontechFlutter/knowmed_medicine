@@ -19,6 +19,8 @@ class SelectBodyPartWidget extends StatelessWidget {
     required this.onTapBodyPart,
   }) : super(key: key);
 
+
+    SymptomCheckerModal modal=SymptomCheckerModal();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -180,25 +182,29 @@ class SelectBodyPartWidget extends StatelessWidget {
               )),
             ],),
           )),
-          SideAnimationPart(selectedBodyPart: selectedBodyPart,onTapBodyPart: onTapBodyPart,),
 
 
 
-          Positioned(
-            bottom: 15,
-            right: 15,
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FloatingActionButton(
-                    child: Icon(Icons.arrow_forward),
-                    onPressed: (){
-                      print('faheem');
-                    }),
-              ),
-            ),
-          )
+
+          // Positioned(
+          //   bottom: 15,
+          //   right: 15,
+          //   child: Align(
+          //     alignment: Alignment.topRight,
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Visibility(
+          //         // visible: ,
+          //         child: FloatingActionButton(
+          //             child: Icon(Icons.arrow_forward),
+          //             onPressed: () async {
+          //               print('faheem');
+          //               await modal.onSymptomsClick(context);
+          //             }),
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
 

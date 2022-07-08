@@ -82,8 +82,20 @@ class SymptomCheckerController extends GetxController{
   }
 
 
+  List allSymptomsList=[].obs;
+  List get getAllSymptomsList =>allSymptomsList;
+  set updateAllSymptomsList(List val){
+    allSymptomsList=val;
+    update();
+  }
 
 
+  RxString selectSymptomId =''.obs;
+  String get getSelectSymptomId=>selectSymptomId.value;
+  set updateSelectSymptomId(String val){
+    selectSymptomId.value=val;
+    update();
+  }
 
 
 }
