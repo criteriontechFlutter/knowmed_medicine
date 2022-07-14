@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:knowmed/AppManager/AlertDialogue.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/MyTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
@@ -151,9 +152,10 @@ class _FoodAndHerbPageViewState extends State<FoodAndHerbPageView> {
                       modal.controller.getFoodAlphabet.isEmpty),
                   child: RightCornerLIstView(
                     onTap: (MedicineDataModal val,int index){
-                      App().navigate(context, MedicineDetails(
-                        index: index,
-                      ));
+                      // App().navigate(context, MedicineDetails(
+                      //   index: index,
+                      // ));
+                      alertToast(context, "Work in progress");
                     },
                     dataList: modal.controller.getFoodAlphabet,
                     parameter: "foodName",

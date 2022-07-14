@@ -30,18 +30,40 @@ class SymptomCheckerModal{
 
   }
 
+int i=0;
+  List alphabets = [];
+  getLetters(){
+    for(i = 65;i<=90;i++){
+      alphabets.add(String.fromCharCode(i));
+    }
+
+  }
 
 
   onSymptomsClick(context)async{
 
     var body={
       "regionOrganId": controller.getSelectSymptomId.toString(),
-      "alphabet":"a".toString()
+      "alphabet":controller.alpha.toString()
     };
 
     var data=await rawData.api('Knowmed/getAllSymptoms', body, context,token: true);
     controller.updateAllSymptomsList=data['responseValue'];
     print("rrrrrrrrrr"+data.toString());
+  }
+
+  onOptionTap(int index){
+    print( controller.getAllSymptomsList[index]['id'].toString(),);
+    if(controller.onTapSymptomsId.contains(controller.getAllSymptomsList[index]['id'])){
+      controller.onTapSymptomsId.remove(controller.getAllSymptomsList[index]['id']);
+      controller.update();
+    }
+    else{
+      controller.onTapSymptomsId.add(controller.getAllSymptomsList[index]['id']);
+      controller.update();
+      print("list : " + controller.onTapSymptomsId.toString());
+    }
+
   }
 
 }

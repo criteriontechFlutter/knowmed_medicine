@@ -9,6 +9,7 @@ import 'package:knowmed/Pages/Symptom%20Checker/Widget/sideAnimationWidget.dart'
 import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerController.dart';
 
 import '../../AppManager/coloured_safe_area.dart';
+import '../../AppManager/my_text_field_2.dart';
 import 'symptomCheckerModal.dart';
 
 class MealPlan extends StatefulWidget {
@@ -78,7 +79,7 @@ int count =0;
         ],
       ),
       allSymptomsWidget(),
-      genderWidget(),
+      suggestedUnlocalizedProblemWidget(),
       // heightWidget(),
       // weightWidget(),
       // activityWidget(),
@@ -122,21 +123,33 @@ int count =0;
             );
           }
         ),
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.arrow_forward),
-            onPressed: () async {
-              if(count<=list.length){
-                setState(() {
-                  count++;
-                });
-              }
-              print('faheem');
-              await modal.onSymptomsClick(context);
-            }),
+        floatingActionButton: GetBuilder(
+          init: SymptomCheckerController(),
+          builder: (_) {
+            return Visibility(
+              visible: modal.controller.getSelectSymptomId!='',
+              child: FloatingActionButton(
+                  child: Icon(Icons.arrow_forward),
+                  onPressed: () async {
+                    if(count<=list.length){
+                      setState(() {
+                        count++;
+                      });
+                    }
+                    print('faheem');
+                    if(count==1){
+                      await modal.onSymptomsClick(context);
+                    }
+                    else if(count==2){
+                      print("sahu");
+                    }
+                  }),
+            );
+          }
+        ),
       ),
     );
   }
-
 
 
 
@@ -167,26 +180,34 @@ int count =0;
                                 (index) => Padding(
                               padding:
                               const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                              child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    color: Colors.yellow.shade50,
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow:  [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        blurRadius: 2,
-                                        blurStyle: BlurStyle.solid,
-                                        offset: Offset(1.0,1.0),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Text(
-                                    modal.controller.getAllSymptomsList[index]['problemName'].toString(),
-                                    style: MyTextTheme()
-                                        .smallBCN
-                                        .copyWith(fontSize: 12),
-                                  )),
+                              child: InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    modal.onOptionTap(index);
+                                  });
+
+                                },
+                                child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      color: modal.controller.onTapSymptomsId.contains(modal.controller.getAllSymptomsList[index]['id'])?Colors.lightGreen:Colors.yellow.shade50,
+                                      borderRadius: BorderRadius.circular(5),
+                                      boxShadow:  [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          blurRadius: 2,
+                                          blurStyle: BlurStyle.solid,
+                                          offset: Offset(1.0,1.0),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Text(
+                                      modal.controller.getAllSymptomsList[index]['problemName'].toString(),
+                                      style: MyTextTheme()
+                                          .smallBCN
+                                          .copyWith(fontSize: 12),
+                                    )),
+                              ),
                             ),
                             growable: true)),
                   ],
@@ -226,14 +247,7 @@ int count =0;
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
 
-
-                ],
-              ),
             ],
           );
         }
@@ -241,71 +255,129 @@ int count =0;
     );
   }
 
-  genderWidget() {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Text(
-          'What`s Your Gender?',
-          style: MyTextTheme().largeBCB,
-        ),
-        Text(
-          'For this we can calculate your target weight',
-          textAlign: TextAlign.center,
-          style: MyTextTheme().largeBCN,
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 28.0),
-        //   child: Column(
-        //     children: List.generate(_mealPlanModel.controller.genderList.length, (index) {
-        //       bool isSelected=  _mealPlanModel.controller.selectedGenderItem==_mealPlanModel.controller.genderList[index];
-        //       return Padding(
-        //         padding: const EdgeInsets.fromLTRB(0,0,0,10),
-        //         child: InkWell(
-        //           onTap: (){
-        //             _mealPlanModel.controller.selectedGenderItem=_mealPlanModel.controller.genderList[index];
-        //             setState(() {
-        //
-        //             });
-        //           },
-        //           child: Container(
-        //             height: 111,
-        //             width: 111,
-        //             decoration: BoxDecoration(
-        //               color: isSelected? Colors.green: Colors.white,
-        //               borderRadius: BorderRadius.circular(50),
-        //             ),
-        //             child: Column(
-        //               crossAxisAlignment: CrossAxisAlignment.center,
-        //               mainAxisAlignment: MainAxisAlignment.center,
-        //               children: [
-        //                 Center(child: Icon(
-        //                   (
-        //                       _mealPlanModel.controller.genderList[index].toString()=='Male'?
-        //                       Icons.male:Icons.female
-        //                   ),
-        //                   color: isSelected? Colors.white: Colors.black,),
-        //                 ),
-        //                 Text(
-        //                   _mealPlanModel.controller.genderList[index].toString(),
-        //                   style: MyTextTheme().mediumBCB.copyWith(
-        //                       color: isSelected? Colors.white: Colors.black87
-        //                   ),
-        //                 )
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //       );
-        //     }),
-        //   ),
-        // )
-      ],
+  suggestedUnlocalizedProblemWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 60, 0, 10),
+            child: Text("Suggested Unlocalized Problems",
+                style: MyTextTheme().mediumBCB),
+          ),
+          MyTextField2(
+            hintText: "Search & add problems",
+            suffixIcon:
+            const Icon(Icons.search, color: Colors.grey, size: 25),
+          ),
+          Expanded(
+            child: GridView.builder(
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 7 / 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5),
+                padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
+                itemCount: 100,
+                itemBuilder: (BuildContext ctx, index) {
+                  return Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow.shade50,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow:  [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 2,
+                            blurStyle: BlurStyle.solid,
+                            offset: Offset(1.0,1.0),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "ListOfSymptoms().Symptoms[index].toString()",
+                        style:
+                        MyTextTheme().smallBCN.copyWith(fontSize: 12),
+                      ));
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+            child: Text("Add any other disease you suffered from",
+                style: MyTextTheme().mediumBCB),
+          ),
+          MyTextField2(
+            hintText: "Search disease",
+            suffixIcon:
+            const Icon(Icons.search, color: Colors.grey, size: 25),
+          ),
+          Expanded(
+            child: GridView.builder(
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 7 / 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5),
+                padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
+                itemCount: 100,
+                itemBuilder: (BuildContext ctx, index) {
+                  return Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow.shade50,
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow:  [
+                          BoxShadow(color: Colors.grey.withOpacity(0.5),
+                            blurRadius: 2,
+                            blurStyle: BlurStyle.solid,
+                            offset: Offset(1.0,1.0),)
+                        ],
+                      ),
+                      child: Text(
+                        "ListOfSymptoms().Symptoms[index].toString()",
+                        style:
+                        MyTextTheme().smallBCN.copyWith(fontSize: 12),
+                      ));
+                }),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8,top: 15),
+              child: Container(
+                width: 80,
+                padding: const EdgeInsets.fromLTRB(6, 6, 10, 6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: AppColor().grey),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.keyboard_backspace_outlined,
+                        color: AppColor().grey),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Back",
+                      style: MyTextTheme().smallGCN,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,)
+        ],
+      ),
     );
   }
 

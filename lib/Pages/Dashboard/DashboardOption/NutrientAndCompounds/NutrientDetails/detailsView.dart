@@ -10,6 +10,7 @@ import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/Nut
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../../../AppManager/appColors.dart';
+import '../../../../../AppManager/common_widgets.dart';
 import 'detailsController.dart';
 
 class NutrientDetailsView extends StatefulWidget {
@@ -21,7 +22,7 @@ class NutrientDetailsView extends StatefulWidget {
 
 class _NutrientDetailsViewState extends State<NutrientDetailsView> {
 
-  ItemScrollController _scrollController1 = ItemScrollController();
+  // ItemScrollController _scrollController1 = ItemScrollController();
 
   NutrientDetailsModal modal=NutrientDetailsModal();
 
@@ -78,7 +79,7 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                             padding: const EdgeInsets.symmetric(vertical: 12),
                               decoration: BoxDecoration(
                                 color: cache == "Overview"?Colors.blue:Colors.white,
-                                  borderRadius:  BorderRadius.only(topLeft:Radius.circular(5),bottomLeft: Radius.circular(5)),
+                                  borderRadius:  const BorderRadius.only(topLeft:Radius.circular(5),bottomLeft: Radius.circular(5)),
                                 border: Border.all(color:cache=="Overview"?AppColor().blue:Colors.black)
                               ),
                               child: Text('Overview',style: cache=="Overview"?MyTextTheme().mediumWCN:MyTextTheme().mediumBCN,textAlign: TextAlign.center)),
@@ -106,42 +107,49 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
                   ),
                 ),
 
-            cache == "Overview"?Container(
-             child: Expanded(
-               child: ListView.builder(
-                   shrinkWrap: true,
-                   itemCount: modal.controller.getNutrientDetailsList.length,
-                   itemBuilder: (BuildContext context, int index){
-                     NutrientDetailsDataModal nutrientData= modal.controller.getNutrientDetailsList[index];
-                     return Padding(
-                       padding: const EdgeInsets.all(8.0),
-                       child: Container(
-                         decoration: BoxDecoration(
-                           border: Border.all(color: AppColor().grey),
-                           borderRadius: BorderRadius.circular(5),
-                         ),
-                         child: Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             Padding(
-                               padding: const EdgeInsets.only(left: 10.0,top: 5),
-                               child: Row(
-                                 children: [
-                                   Image.asset("assets/"+nutrientData.heading.toString()+".png",height: 20,width: 20,color: Colors.blue,),
-                                   const SizedBox(width: 5,),
-                                   Text(nutrientData.heading.toString(),style: MyTextTheme().mediumBCB.copyWith(color: Colors.blue)),
-                                 ],
-                               ),
-                             ),
-                             _getWidgetNutrientDetails(nutrientData),
-                             const SizedBox(height: 10,)
-                           ],
-                         ),
-                       ),
-                     );
-                   }),
-             ),
-            ):Expanded(
+            cache == "Overview"?Expanded(
+              child: CommonWidgets().showNoData(
+                title: 'Medicine List Data Not Found',
+                show: (modal.controller.getShowNoData &&
+                    modal.controller.getNutrientDetailsList.isEmpty),
+                loaderTitle: 'Loading Medicine List',
+                showLoader: (!modal.controller.getShowNoData &&
+                    modal.controller.getNutrientDetailsList.isNotEmpty),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: modal.controller.getNutrientDetailsList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      NutrientDetailsDataModal nutrientData= modal.controller.getNutrientDetailsList[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColor().grey),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0,top: 5),
+                                child: Row(
+                                  children: [
+                                    Image.asset("assets/"+nutrientData.heading.toString()+".png",height: 20,width: 20,color: Colors.blue,),
+                                    const SizedBox(width: 5,),
+                                    Text(nutrientData.heading.toString(),style: MyTextTheme().mediumBCB.copyWith(color: Colors.blue)),
+                                  ],
+                                ),
+                              ),
+                              _getWidgetNutrientDetails(nutrientData),
+                              const SizedBox(height: 10,)
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            )
+            :Expanded(
               child: Column(
                 children: [
                   Padding(
@@ -218,20 +226,6 @@ class _NutrientDetailsViewState extends State<NutrientDetailsView> {
       ),
     );
   }
-
-
-List abc=[
-  {
-    'name':'faheem',
-  },
-  {
-    'name':'faheem',
-  },
-  {
-    'name':'faheem',
-  }
-  ];
-
 
 
 

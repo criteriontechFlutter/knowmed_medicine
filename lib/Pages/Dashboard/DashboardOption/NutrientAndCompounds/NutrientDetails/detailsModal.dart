@@ -14,6 +14,7 @@ class NutrientDetailsModal{
   RawData rawData=RawData();
 
   onPressDetails(context)async{
+    controller.updateShowNoData=false;
 
     var body=
     {
@@ -22,6 +23,7 @@ class NutrientDetailsModal{
     };
 
     var data=await rawData.api('Knowmed/nutrientDetails', body, context,token: true);
+    controller.updateShowNoData=true;
     print(data.toString());
     controller.updateNutrientDetailsList=data['responseValue'];
   }

@@ -15,6 +15,13 @@ class NutrientDetailsController extends GetxController{
     update();
   }
 
+  RxBool showNoData=false.obs;
+  bool get getShowNoData=>(showNoData.value);
+  set updateShowNoData(bool val){
+    showNoData.value=val;
+    update();
+  }
+
   List nutrientSelectFilterList=[].obs;
 
   List get getNutrientSelectFilterList=>nutrientSelectFilterList;

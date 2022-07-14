@@ -98,4 +98,13 @@ class SymptomCheckerController extends GetxController{
   }
 
 
+  String alpha ='A';
+  set updateAlphabet(String val){
+    alpha=val;
+    update();
+  }
+
+  List onTapSymptomsId = [];
+
+
 }

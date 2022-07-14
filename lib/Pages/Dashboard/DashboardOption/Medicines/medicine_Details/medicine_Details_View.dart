@@ -99,135 +99,139 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           body: GetBuilder(
             init: MedicineDetailsController(),
             builder: (_) {
-              return ScrollablePositionedList.builder(
-               itemScrollController: _scrollController1,
-                  //controller:  _controller,
-                  itemCount: modal.controller.getMedicineDetailsList.length,
-                  itemBuilder: (context,index3) {
-                    MedicineDetailsDataModal modaldata=modal.controller.getMedicineDetailsList[index3];
-                    MedicineDataModal medicineData= medicine_Modal.controller.getMedicineAlphabet[widget.index];
-                    return CommonWidgets().showNoData(
-                      title: 'Medicine List Data Not Found',
-                      show: (modal.controller.getShowNoData &&
-                          modal.controller.getMedicineDetailsList.isEmpty),
-                      loaderTitle: 'Loading Medicine List',
-                      showLoader: (!modal.controller.getShowNoData &&
-                          modal.controller.getMedicineDetailsList.isEmpty),
-                      child: Column(
-                        children: [
-                          SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        border:Border.all(color: Colors.grey),
-                                        borderRadius: BorderRadius.circular(10)
-                                    ),
-
-                                    child: Padding(
+              return Center(
+                child: CommonWidgets().showNoData(
+                  title: 'Medicine List Data Not Found',
+                  show: (modal.controller.getShowNoData &&
+                      modal.controller.getMedicineDetailsList.isEmpty),
+                  loaderTitle: 'Loading Medicine List',
+                  showLoader: (!modal.controller.getShowNoData &&
+                      modal.controller.getMedicineDetailsList.isNotEmpty),
+                  child: ScrollablePositionedList.builder(
+                      itemScrollController: _scrollController1,
+                      //controller:  _controller,
+                      itemCount: modal.controller.getMedicineDetailsList.length,
+                      itemBuilder: (context,index3) {
+                        MedicineDetailsDataModal modaldata=modal.controller.getMedicineDetailsList[index3];
+                        MedicineDataModal medicineData= medicine_Modal.controller.getMedicineAlphabet[widget.index];
+                        return
+                          Column(
+                            children: [
+                              SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                         index3 == 0?Padding(
-                                           padding: const EdgeInsets.fromLTRB(4,0,0,2,),
-                                           child: Text( medicineData.medicineName.toString(),style: MyTextTheme().mediumBCB,),
-                                         ):const SizedBox(),
-                                          //index3 == 0?SizedBox(height: 2,):SizedBox(),
-                                         index3 == 0?Padding(
-                                           padding: const EdgeInsets.fromLTRB(4,0,0,8),
-                                           child: Text('Know your medicine for better treatment',style: MyTextTheme().mediumBCN,),
-                                         ):const SizedBox(),
-                                          Wrap(
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            border:Border.all(color: Colors.grey),
+                                            borderRadius: BorderRadius.circular(10)
+                                        ),
+
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Image.asset("assets/"+modaldata.heading.toString()+".png",height: 20,width: 20,color: Colors.blue,),
-                                              SizedBox(width: 8,),
-                                              Text(modaldata.heading.toString(),style: MyTextTheme().mediumBCB.copyWith(color: Colors.blue),),
+                                              index3 == 0?Padding(
+                                                padding: const EdgeInsets.fromLTRB(4,0,0,2,),
+                                                child: Text( medicineData.medicineName.toString(),style: MyTextTheme().mediumBCB,),
+                                              ):const SizedBox(),
+                                              //index3 == 0?SizedBox(height: 2,):SizedBox(),
+                                              index3 == 0?Padding(
+                                                padding: const EdgeInsets.fromLTRB(4,0,0,8),
+                                                child: Text('Know your medicine for better treatment',style: MyTextTheme().mediumBCN,),
+                                              ):const SizedBox(),
+                                              Wrap(
+                                                children: [
+                                                  Image.asset("assets/"+modaldata.heading.toString()+".png",height: 20,width: 20,color: Colors.blue,),
+                                                  SizedBox(width: 8,),
+                                                  Text(modaldata.heading.toString(),style: MyTextTheme().mediumBCB.copyWith(color: Colors.blue),),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 10,),
+                                              _getWidgetAccordingToType( modaldata),
+                                              const SizedBox(height: 5,),
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                //mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Visibility(
+                                                      visible:modaldata.reference!.isNotEmpty,
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(height: 8,),
+                                                          Text('Ref:',style: MyTextTheme().mediumBCB,),
+                                                        ],
+                                                      )),
+                                                  Expanded(child: Html(data:modaldata.reference.toString(),)),
+                                                ],
+                                              )
+
                                             ],
                                           ),
-                                          const SizedBox(height: 10,),
-                                          _getWidgetAccordingToType( modaldata),
-                                          const SizedBox(height: 5,),
-                                         Row(
-                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                           //mainAxisAlignment: MainAxisAlignment.start,
-                                           children: [
-                                             Visibility(
-                                              visible:modaldata.reference!.isNotEmpty,
-                                                 child: Column(
-                                                   children: [
-                                                     SizedBox(height: 8,),
-                                                     Text('Ref:',style: MyTextTheme().mediumBCB,),
-                                                   ],
-                                                 )),
-                                             Expanded(child: Html(data:modaldata.reference.toString(),)),
-                                           ],
-                                         )
-
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8,0,8,0),
-                        child: Visibility(
-                          visible:index3 == 0?true:false,
-                          child: Wrap(
-                            children: List.generate(
-                                modal.controller.getMedicineDetailsList.length
-                                , (index2) {
-                              return
-                                InkWell(
-                                  onTap: (){
-                                    _scrollController1.scrollTo(index:index2, duration: const Duration(milliseconds: 500));
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                                      child: Visibility(
+                                        visible:index3 == 0?true:false,
+                                        child: Wrap(
+                                          children: List.generate(
+                                              modal.controller.getMedicineDetailsList.length
+                                              , (index2) {
+                                            return
+                                              InkWell(
+                                                onTap: (){
+                                                  _scrollController1.scrollTo(index:index2, duration: const Duration(milliseconds: 500));
 
-                                  },
-                                  child:modal.controller.getMedicineDetailsList[index2].heading.toString() == "Overview"?const Text(""):
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(3,4,4,3),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColor().blue,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: RichText(
-                                          text: TextSpan(children: [
-                                             WidgetSpan(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(8, 0, 2, 3),
-                                                  child: Image.asset("assets/"+modal.controller.getMedicineDetailsList[index2].heading.toString()+".png",height: 20,width: 20,color: Colors.white,)
-                                                )),
-                                            WidgetSpan(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.fromLTRB(3, 5, 5,7),
-                                                  child:
-                                                  Text(
-                                                      modal.controller.getMedicineDetailsList[index2].heading.toString(),textAlign: TextAlign.center,
-                                                    style: MyTextTheme().smallWCB,
+                                                },
+                                                child:modal.controller.getMedicineDetailsList[index2].heading.toString() == "Overview"?const Text(""):
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(3,4,4,3),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: AppColor().blue,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                    ),
+                                                    child: RichText(
+                                                        text: TextSpan(children: [
+                                                          WidgetSpan(
+                                                              child: Padding(
+                                                                  padding: EdgeInsets.fromLTRB(8, 0, 2, 3),
+                                                                  child: Image.asset("assets/"+modal.controller.getMedicineDetailsList[index2].heading.toString()+".png",height: 20,width: 20,color: Colors.white,)
+                                                              )),
+                                                          WidgetSpan(
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.fromLTRB(3, 5, 5,7),
+                                                                child:
+                                                                Text(
+                                                                  modal.controller.getMedicineDetailsList[index2].heading.toString(),textAlign: TextAlign.center,
+                                                                  style: MyTextTheme().smallWCB,
+                                                                ),
+                                                              )),
+                                                        ])),
+
                                                   ),
-                                                )),
-                                          ])),
-
+                                                ),
+                                              );
+                                          }),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                );
-                            }),
-                          ),
-                        ),
-                      ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+
+                      }
+                  ),
+                )
               );
             }
           ),

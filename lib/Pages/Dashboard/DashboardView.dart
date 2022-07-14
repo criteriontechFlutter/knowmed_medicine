@@ -12,6 +12,7 @@ import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/new/i
 import 'package:knowmed/Pages/Dashboard/DashboardOption/MedicalTerminology/medical_term_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/NutrientAndCompounds/nutrient_and_compound_page_view.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/SideEffectChecker/sideeffect_checker_page_view.dart';
 import 'package:knowmed/Pages/Symptom%20Checker/symptomCheckerView.dart';
 import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 import 'package:lottie/lottie.dart';
@@ -603,7 +604,7 @@ class _DashboardViewState extends State<DashboardView>{
               Container(height: 60, child: const VerticalDivider(color: Colors.grey)),
               InkWell(
                 onTap: (){
-                  //App().navigate(context, const SideeffectCheckerPageView());
+                  App().navigate(context, const SideeffectCheckerPageView());
                 },
                 child: Container(
                   height: 60,
