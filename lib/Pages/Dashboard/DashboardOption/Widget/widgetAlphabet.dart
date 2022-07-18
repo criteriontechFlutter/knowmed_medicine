@@ -1,16 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
-import 'package:knowmed/AppManager/appColors.dart';
-import 'package:knowmed/AppManager/coloured_safe_area.dart';
-import 'package:knowmed/AppManager/common_widgets.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
-import 'package:knowmed/Widgets/NavigationDrawerWidget.dart';
 
-import '../../../../AppManager/aimation_util.dart';
-import '../../../../AppManager/appUtils.dart';
-import '../../../../AppManager/my_text_field_2.dart';
 
 class AlphabetWidget extends StatelessWidget {
 
@@ -20,6 +11,7 @@ class AlphabetWidget extends StatelessWidget {
   final List? filterList;
   final Function(String alphabet) onTapAlphabet;
   final Function(Map val) onPressSymptom;
+  final bool isVisible;
 
   const AlphabetWidget({Key? key,
     this.filterParameter,
@@ -27,7 +19,7 @@ class AlphabetWidget extends StatelessWidget {
     required this.rightCornerList,
     required this.onTapAlphabet,
     this.filterList,
-    required this.onPressSymptom,
+    required this.onPressSymptom, required this.isVisible,
 
   }) : super(key: key);
 
@@ -58,9 +50,7 @@ class AlphabetWidget extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: SingleChildScrollView(
-                    reverse:
-
-                        selectedAlphabet=='A-Z',
+                    reverse:selectedAlphabet=='A-Z',
                     child: Column(
                       children: [
 
@@ -97,7 +87,7 @@ class AlphabetWidget extends StatelessWidget {
                             shrinkWrap: true,),
                         ),
                         Visibility(
-                          //visible: modal.controller.alpha=="A-Z",
+                          visible: isVisible,//modal.controller.alpha=="A-Z",
                           child: Container(
                             height: 30,
                             decoration: const BoxDecoration(

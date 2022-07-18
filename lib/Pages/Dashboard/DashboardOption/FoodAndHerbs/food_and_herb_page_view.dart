@@ -122,6 +122,7 @@ class _FoodAndHerbPageViewState extends State<FoodAndHerbPageView> {
             init:FoodAndHerbController(),
             builder: (_) {
               return AlphabetWidget(
+                isVisible: modal.controller.alpha=="A-Z",
                 onTapAlphabet: (String alphabet){
                   setState(() {
                     modal.controller.alpha = alphabet;

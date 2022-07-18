@@ -26,24 +26,47 @@ class SymptomCheckerDataModal {
 
 
 
-class AllSymptomsByAlphabet {
-  int? id;
+
+class SuggestedUnlocalizedProblemDataModal {
+  String? id;
   String? problemName;
   String? isVisible;
 
-  AllSymptomsByAlphabet({this.id, this.problemName, this.isVisible});
+  SuggestedUnlocalizedProblemDataModal(
+      {this.id, this.problemName, this.isVisible});
 
-  AllSymptomsByAlphabet.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  SuggestedUnlocalizedProblemDataModal.fromJson(Map<String, dynamic> json) {
+    id = (json['id']??'').toString();
     problemName = json['problemName'];
     isVisible = json['isVisible'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['problemName'] = problemName;
+    data['isVisible'] = isVisible;
+    return data;
+  }
+}
+
+// Add Any Other Disease you Suffered from DataModal
+
+class AddAnyOtherDiseaseDataModal {
+  int? id;
+  String? problemName;
+
+  AddAnyOtherDiseaseDataModal({this.id, this.problemName});
+
+  AddAnyOtherDiseaseDataModal.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    problemName = json['problemName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['problemName'] = this.problemName;
-    data['isVisible'] = this.isVisible;
     return data;
   }
 }

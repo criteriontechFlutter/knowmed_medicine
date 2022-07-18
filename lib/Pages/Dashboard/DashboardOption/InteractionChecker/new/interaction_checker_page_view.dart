@@ -7,6 +7,8 @@ import 'package:knowmed/AppManager/AlertDialogue.dart';
 import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
+import 'package:knowmed/AppManager/appUtils.dart';
+import 'package:knowmed/AppManager/coloured_safe_area.dart';
 import 'interactionCheckerController.dart';
 import 'interactionCheckerModal.dart';
 
@@ -47,7 +49,7 @@ class _InteractionCheckerPageViewState extends State<InteractionCheckerPageView>
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey,
-        child: SafeArea(
+        child: ColoredSafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
@@ -57,6 +59,11 @@ class _InteractionCheckerPageViewState extends State<InteractionCheckerPageView>
                       color: AppColor().text_blue
                   )
               ),
+              // leading: InkWell(
+              //   onTap: (){
+              //     Navigator.pop(context);
+              //   },
+              //     child: Icon(Icons.arrow_back)),
               backgroundColor: AppColor().grey_header,
             ),
         body: Column(

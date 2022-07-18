@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:knowmed/AppManager/appUtils.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/InteractionChecker/new/interaction_checker_page_view.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../AppManager/MtTextTheme.dart';
@@ -21,7 +23,7 @@ class _ResultViewState extends State<ResultView> {
         appBar: AppBar(
           leading: InkWell(
             onTap: (){
-              Navigator.pop(context);
+             App().replaceNavigate(context, InteractionCheckerPageView());
             },
               child: Icon(Icons.arrow_back,color: AppColor().grey,)),
           title: Text('Interaction Checker Results',

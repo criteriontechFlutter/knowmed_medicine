@@ -14,12 +14,29 @@ class DiseaseModal{
   RawData rawData=RawData();
 
 
+  // medicineFilter(context)async {
+  //
+  //   var body={
+  //     "userId":UserData().getUserData.id.toString(),
+  //   };
+  //
+  //   var data=await rawData.api('Knowmed/getAllMedicineGroup', body, context,token: true);
+  //   print('fffffffffffffffffffff'+data.toString());
+  //   controller.updateFilterList=data['responseValue'];
+  //   print('groupId: '+ controller.getMedicineGroupId.toString());
+  //
+  //   //print("Alphabets are: " + alphabets.toString());
+  // }
+
+
+
   getLetters(){
     for(i = 65;i<=90;i++){
       alphabets.add(String.fromCharCode(i));
     }
 
   }
+
 
 
 

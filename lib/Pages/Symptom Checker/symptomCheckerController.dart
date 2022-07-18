@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'symptomCheckerDataModal.dart';
+
 class SymptomCheckerController extends GetxController{
 
   Rx<TextEditingController> ageC=TextEditingController().obs;
@@ -83,7 +85,25 @@ class SymptomCheckerController extends GetxController{
 
 
   List allSymptomsList=[].obs;
-  List get getAllSymptomsList =>allSymptomsList;
+
+  // List<AllSymptomsByAlphabet> get getAllSymptomsList=>searchC.value.text==''?List<AllSymptomsByAlphabet>.from(
+  //     allSymptomsList.map((element) => AllSymptomsByAlphabet.fromJson(element))
+  // ):List<AllSymptomsByAlphabet>.from(
+  //     allSymptomsList.map((element) => AllSymptomsByAlphabet.fromJson(element))
+  // ).where((element) => (element.problemName!.toLowerCase().contains(searchC.value.text.toLowerCase()))).toList();
+
+
+  List<SuggestedUnlocalizedProblemDataModal> get getAllSymptomsList=>List<SuggestedUnlocalizedProblemDataModal>.from(
+      (
+          (searchC.value.text==''?allSymptomsList:allSymptomsList.where((element) =>
+              (
+                  element['problemName'].toString().toLowerCase()
+              ).trim().contains(searchC.value.text.toLowerCase().trim())
+          ))
+              .map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
+      ));
+
+  // List get getAllSymptomsList =>allSymptomsList;
   set updateAllSymptomsList(List val){
     allSymptomsList=val;
     update();
@@ -104,7 +124,53 @@ class SymptomCheckerController extends GetxController{
     update();
   }
 
-  List onTapSymptomsId = [];
+  List onTapBodyPartSymptomsId = [];
 
+  RxBool showNoData=false.obs;
+  bool get getShowNoData=>(showNoData.value);
+  set updateShowNoData(bool val){
+    showNoData.value=val;
+    update();
+  }
+
+  Rx<TextEditingController> searchC = TextEditingController().obs;
+  List suggestedProblemList=[].obs;
+
+
+  List<SuggestedUnlocalizedProblemDataModal> get getSuggestedProblemList=>searchC.value.text==''?List<SuggestedUnlocalizedProblemDataModal>.from(
+      suggestedProblemList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
+  ):List<SuggestedUnlocalizedProblemDataModal>.from(
+      suggestedProblemList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
+  ).where((element) => (element.problemName!.toLowerCase().contains(searchC.value.text.toLowerCase()))).toList();
+
+  // List get getSuggestedProblemList=>suggestedProblemList;
+
+  set updateSuggestedProblemList(List val){
+    suggestedProblemList=val;
+    update();
+  }
+
+  List unlocalizedProblemId = [];
+
+
+
+
+
+
+  Rx<TextEditingController> diseaseSearchC = TextEditingController().obs;
+  List addOtherDiseaseList=[].obs;
+
+  List<AddAnyOtherDiseaseDataModal> get getAddOtherDiseaseList=>diseaseSearchC.value.text==''?List<AddAnyOtherDiseaseDataModal>.from(
+      addOtherDiseaseList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
+  ):List<AddAnyOtherDiseaseDataModal>.from(
+      addOtherDiseaseList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
+  ).where((element) => (element.problemName!.toLowerCase().contains(diseaseSearchC.value.text.toLowerCase()))).toList();
+
+  set updateAddOtherDiseaseList(List val){
+    addOtherDiseaseList=val;
+    update();
+  }
+
+  List diseaseSufferedId=[];
 
 }
