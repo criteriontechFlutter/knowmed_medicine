@@ -22,7 +22,7 @@ class DiseaseDetailsModal{
      // "departmentId":controller2.getDiseaseAlphabet[index].id.toString(),
      // "problemId":controller2.getDiseaseAlphabet[index].id.toString()
       "departmentId":"9",
-      "problemId":"120",
+      "problemId":"222",
       "userId":"120",
 
     };

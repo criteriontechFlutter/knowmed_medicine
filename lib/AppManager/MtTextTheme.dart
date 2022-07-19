@@ -221,6 +221,18 @@ class MyTextTheme {
   );
 
 
+  TextStyle smallOCB=GoogleFonts.lato(
+      color: AppColor().darkOrangeText,
+      fontSize: 14,
+      fontWeight: FontWeight.bold
+  );
+
+  TextStyle mediumBluetexttwo=GoogleFonts.lato(
+      color: AppColor().blue_text_two,
+      fontSize: 14,
+      fontWeight: FontWeight.bold
+  );
+
 
 
 

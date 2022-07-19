@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
@@ -43,8 +44,14 @@ BodyPart selectedBodyPart =BodyPart.notSelected;
     super.initState();
     get();
   }
-  get()async{await modal.onSymptomsClick(context);
+  get()async{
     await modal.onAddAnyOtherDisease(context);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Get.delete<SymptomCheckerController>();
+    super.dispose();
   }
 int count =0;
   @override
@@ -140,13 +147,13 @@ int count =0;
                     }
                     print('faheem');
                     if(count==1){
+                      await modal.onSymptomsClick(context);
                       modal.controller.update();
                     }
                     else if(count==2){
 
 
                       await modal.onSuggestedProblem(context);
-                      // await modal.onSuggestedProblem(context);
                       modal.controller.update();
                     }
                   }),
@@ -192,6 +199,7 @@ int count =0;
                               modal.controller.getAllSymptomsList.length,
                                   (index) {
                                     SuggestedUnlocalizedProblemDataModal symptomsData=modal.controller.getAllSymptomsList[index];
+                                    //print('arsalan'+symptomsData.id.toString());
                                 return Padding(
                                   padding:
                                   const EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -304,46 +312,47 @@ int count =0;
 
               ),
               Expanded(
-                child: GridView.builder(
-                    gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 7 / 2,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5),
-                    padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
-                    itemCount: modal.controller.getSuggestedProblemList.length,
-                    itemBuilder: (BuildContext ctx, index) {
-                     SuggestedUnlocalizedProblemDataModal allProblems=modal.controller.getSuggestedProblemList[index];
-                      return InkWell(
-                        onTap: (){
-                          setState(() {
-                            modal.onSuggestProblemTap(index);
-                            modal.controller.searchC.value.clear();
-                          });
-                        },
-                        child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: modal.controller.unlocalizedProblemId.contains(allProblems.id)?Colors.lightGreen:Colors.yellow.shade50,
-                             // color: Colors.yellow.shade50,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow:  [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  blurRadius: 2,
-                                  blurStyle: BlurStyle.solid,
-                                  offset: Offset(1.0,1.0),
+                child:   GridView.builder(
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 7 / 2,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 5),
+                        padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
+                        itemCount: modal.controller.getSuggestedProblemList.length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          SuggestedUnlocalizedProblemDataModal allProblems=modal.controller.getSuggestedProblemList[index];
+                          return InkWell(
+                            onTap: (){
+                              setState(() {
+                                modal.onSuggestProblemTap(index);
+                                modal.controller.searchC.value.clear();
+                              });
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: modal.controller.unlocalizedProblemId.contains(allProblems.id)?Colors.lightGreen:Colors.yellow.shade50,
+                                  // color: Colors.yellow.shade50,
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow:  [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      blurRadius: 2,
+                                      blurStyle: BlurStyle.solid,
+                                      offset: Offset(1.0,1.0),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            child: Text(
-                              allProblems.problemName.toString(),
-                              style:
-                              MyTextTheme().smallBCN.copyWith(fontSize: 12),
-                            )),
-                      );
-                    }),
+                                child: Text(
+                                  allProblems.problemName.toString(),
+                                  style:
+                                  MyTextTheme().smallBCN.copyWith(fontSize: 12),
+                                )),
+                          );
+                        })
+
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),

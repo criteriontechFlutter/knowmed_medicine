@@ -1,4 +1,204 @@
 
+
+
+class ClinicalFeaturesDataModal {
+  String? departmentId;
+  String? departmentName;
+  String? inputType;
+  List<Concern>? concern;
+
+  ClinicalFeaturesDataModal(
+      {this.departmentId, this.departmentName, this.inputType, this.concern});
+
+  ClinicalFeaturesDataModal.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    inputType = json['inputType'];
+    if (json['concern'] != null) {
+      concern = <Concern>[];
+      json['concern'].forEach((v) {
+        concern!.add(new Concern.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    data['inputType'] = this.inputType;
+    if (this.concern != null) {
+      data['concern'] = this.concern!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Concern {
+  String? stageId;
+  String? stage;
+  List<Data>? data;
+
+  Concern({this.stageId, this.stage, this.data});
+
+  Concern.fromJson(Map<String, dynamic> json) {
+    stageId = json['stageId'];
+    stage = json['stage'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['stageId'] = this.stageId;
+    data['stage'] = this.stage;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Data {
+  String? problemName;
+
+  Data({this.problemName});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    problemName = json['problemName'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['problemName'] = this.problemName;
+    return data;
+  }
+}
+
+
+
+//Diagnostics  Data  Modal
+
+
+
+
+class DiagnosticsDataModal {
+  String? departmentId;
+  String? departmentName;
+  String? type;
+  List<Investigation>? investigation;
+
+  DiagnosticsDataModal(
+      {this.departmentId, this.departmentName, this.type, this.investigation});
+
+  DiagnosticsDataModal.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    type = json['type'];
+    if (json['investigation'] != null) {
+      investigation = <Investigation>[];
+      json['investigation'].forEach((v) {
+        investigation!.add(new Investigation.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    data['type'] = this.type;
+    if (this.investigation != null) {
+      data['investigation'] =
+          this.investigation!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Investigation {
+  String? stageId;
+  String? stage;
+  List<DiagnosticsData>? data;
+
+  Investigation({this.stageId, this.stage, this.data});
+
+  Investigation.fromJson(Map<String, dynamic> json) {
+    stageId = json['stageId'];
+    stage = json['stage'];
+    if (json['data'] != null) {
+      data = <DiagnosticsData>[];
+      json['data'].forEach((v) {
+        data!.add(new DiagnosticsData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['stageId'] = this.stageId;
+    data['stage'] = this.stage;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class DiagnosticsData {
+  String? testName;
+  String? subTestName;
+  String? propertyName;
+  String? propertyValue;
+  String? remarkValue;
+
+  DiagnosticsData(
+      {this.testName,
+        this.subTestName,
+        this.propertyName,
+        this.propertyValue,
+        this.remarkValue});
+
+  DiagnosticsData.fromJson(Map<String, dynamic> json) {
+    testName = json['testName'];
+    subTestName = json['subTestName'];
+    propertyName = json['propertyName'];
+    propertyValue = json['propertyValue'];
+    remarkValue = json['remarkValue'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['testName'] = this.testName;
+    data['subTestName'] = this.subTestName;
+    data['propertyName'] = this.propertyName;
+    data['propertyValue'] = this.propertyValue;
+    data['remarkValue'] = this.remarkValue;
+    return data;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class DiseaseDetailsDataModal {
   String? headingId;
   String? heading;

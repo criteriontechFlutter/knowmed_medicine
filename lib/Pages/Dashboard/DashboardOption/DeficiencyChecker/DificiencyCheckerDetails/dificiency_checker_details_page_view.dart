@@ -20,6 +20,7 @@ class _DeficiencyCheckerDetailsPageViewState extends State<DeficiencyCheckerDeta
 
 
   //SideEffectCheckerModal modal=SideEffectCheckerModal();
+  DificiencyCheckerModal modal=DificiencyCheckerModal();
 
   @override
   void initState(){
@@ -34,6 +35,8 @@ class _DeficiencyCheckerDetailsPageViewState extends State<DeficiencyCheckerDeta
     super.dispose();
     Get.delete<DificiencyCheckerController>();
   }
+
+  String cache='Deficiency';
 
   @override
   Widget build(BuildContext context) {
@@ -50,180 +53,186 @@ class _DeficiencyCheckerDetailsPageViewState extends State<DeficiencyCheckerDeta
               ),
               backgroundColor: AppColor().grey_header,
             ),
-        body: SingleChildScrollView(
-          child: Column(
+
+            body: GetBuilder(
+            init: DificiencyCheckerController(),
+            builder: (_) {
+            return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(20),
-                child: GetBuilder(
-                  init:DificiencyCheckerController(),
-                  builder: (_) {
-                    return sideeffectCheckerPart(context);
-                  }
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: (){
+                          setState(() {
+                            cache="Deficiency";
+                          });
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            decoration: BoxDecoration(
+                                color: cache == "Deficiency"?Colors.blue:Colors.white,
+                                borderRadius:  BorderRadius.only(topLeft:Radius.circular(5),bottomLeft: Radius.circular(5)),
+                                border: Border.all(color:cache=="Deficiency"?AppColor().blue:Colors.grey)
+                            ),
+                            child: Text('Deficiency',style: cache=="Deficiency"?MyTextTheme().mediumWCN:MyTextTheme().mediumBCN,textAlign: TextAlign.center)),
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: (){
+                          setState(() {
+                            cache="Toxicity";
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color:  cache == "Toxicity"?Colors.blue:Colors.white,
+                            border: Border.all(color: cache=="Toxicity"?AppColor().blue:AppColor().grey),
+                            borderRadius: const BorderRadius.only(topRight:Radius.circular(5),bottomRight: Radius.circular(5)),
+                          ),
+                          child: Text('Toxicity',style: cache=="Toxicity"?MyTextTheme().mediumWCN:MyTextTheme().mediumBCN,textAlign: TextAlign.center),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+             Expanded(child:
+
+             cache == "Deficiency"?Container(
+               //height: MediaQuery.of(context).size.height,
+                 margin: const EdgeInsets.fromLTRB(10,0,10,10),
+                 decoration: BoxDecoration(
+                   color: AppColor().white,
+                   border:
+                   Border.all(
+                       color: AppColor().greyLight
+                   ),
+                   borderRadius: const BorderRadius.only(
+                     topLeft:Radius.circular(15),
+                     bottomLeft: Radius.circular(15),
+                     bottomRight: Radius.circular(15),
+                     topRight: Radius.circular(15),
+                   ),
+                 ),
+                 child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       const SizedBox(height: 10),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: [
+                           Text('Nutrient',style: MyTextTheme().mediumBCB,),
+                           Text('Symptom',style: MyTextTheme().mediumBCB),
+                         ],
+                       ),
+                       const SizedBox(height: 2),
+                       Divider(color: AppColor().greyLight),
+                       const SizedBox(height: 10),
+
+                       Expanded(
+                         child: Padding(
+                             padding: const EdgeInsets.fromLTRB(20,0,20,10),
+
+                             child: ListView.builder(
+                                 itemCount: (modal.controller.getDeficiencyDetailsList.deficinecy??[]).length,
+                                 itemBuilder: (BuildContext context, int index) {
+                                   Deficinecy effectedMedicineData= modal.controller.getDeficiencyDetailsList.deficinecy![index];
+                                   return Padding(
+                                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                     child: Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                       children: [
+                                         Text(effectedMedicineData.nutrient.toString(),style: MyTextTheme().smallBCB),
+                                         Text('',style: MyTextTheme().smallBCB),
+                                         Text(effectedMedicineData.symptom.toString(),style: MyTextTheme().smallBCN),
+
+                                       ],
+                                     ),
+                                   );
+                                 }
+                             )
+                         ),
+                       ),
+
+                     ]
+                 )
+             ):Container(
+                 margin: const EdgeInsets.fromLTRB(10,0,10,10),
+                 decoration: BoxDecoration(
+                   color: AppColor().white,
+                   border:
+                   Border.all(
+                       color: AppColor().greyLight
+                   ),
+                   borderRadius: const BorderRadius.only(
+                     topLeft:Radius.circular(15),
+                     bottomLeft: Radius.circular(15),
+                     bottomRight: Radius.circular(15),
+                     topRight: Radius.circular(15),
+                   ),
+                 ),
+                 child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       const SizedBox(height: 10),
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                         children: [
+                           Text('Nutrient',style: MyTextTheme().mediumBCB,),
+                           Text('Symptom',style: MyTextTheme().mediumBCB),
+                         ],
+                       ),
+                       const SizedBox(height: 2),
+                       Divider(color: AppColor().greyLight),
+                       const SizedBox(height: 10),
+
+                       Expanded(
+                         child: Padding(
+                             padding: const EdgeInsets.fromLTRB(20,0,20,10),
+
+                             child: ListView.builder(
+                                 itemCount: (modal.controller.getDeficiencyDetailsList.toxicity??[]).length,
+                                 shrinkWrap: true,
+                                 itemBuilder: (BuildContext context, int index) {
+                                   Toxicity toxicity= modal.controller.getDeficiencyDetailsList.toxicity![index];
+                                   return Padding(
+                                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                     child: Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                       children: [
+                                         Text(toxicity.nutrient.toString(),style: MyTextTheme().smallBCB),
+                                         Text('',style: MyTextTheme().smallBCB),
+                                         Text(toxicity.symptom.toString(),style: MyTextTheme().smallBCN),
+
+                                       ],
+
+                                     ),
+
+                                   );
+                                 }
+                             )
+                         ),
+                       ),
+
+                     ]
+                 )
+             )
+             )
+
+
             ],
-          ),
-        )
+            );
+    }
+            )
+
         )
         )
     );
   }
-}
-sideeffectCheckerPart(context){
-  DificiencyCheckerModal modal=DificiencyCheckerModal();
-
-  return GetBuilder(
-    init: DificiencyCheckerController(),
-    builder: (_) {
-      return Form(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: AppColor().white,
-                  border:
-                  Border.all(
-                      color: AppColor().greyLight
-                  ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft:Radius.circular(15),
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                     Container(
-                             padding: const EdgeInsets.only(left: 10,top: 10,right: 10),
-                             child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Deficiency',
-                              style: MyTextTheme().largeSCB.copyWith(
-                              color: AppColor().text_blue
-                          ),
-                      ),
-
-                    ]
-                       )
-                     ),
-                      const SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text('Nutrient',style: MyTextTheme().smallGCN,),
-                          Text('Symptom',style: MyTextTheme().smallGCN),
-                        ],
-                      ),
-                      const SizedBox(height: 2),
-                      Divider(color: AppColor().greyLight),
-                      const SizedBox(height: 10),
-
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                         child: ListView.builder(
-                           physics: const NeverScrollableScrollPhysics(),
-                              itemCount: (modal.controller.getDeficiencyDetailsList.deficinecy??[]).length,
-                              shrinkWrap: true,
-                              itemBuilder: (BuildContext context, int index) {
-                                Deficinecy effectedMedicineData= modal.controller.getDeficiencyDetailsList.deficinecy![index];
-                                return Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(child: Text(effectedMedicineData.nutrient.toString(),style: MyTextTheme().smallBCB)),
-                                      Expanded(child: Text('',style: MyTextTheme().smallBCB)),
-                                      Expanded(child: Text(effectedMedicineData.symptom.toString(),style: MyTextTheme().smallBCN)),
-
-                                    ],
-                                  ),
-                                );
-                              }
-                          )
-                       /* child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(child: Text(effectedMedicineData.effectedMedicine![0].problemName.toString(),style: MyTextTheme().smallBCN)),
-                            Expanded(child: Text(effectedMedicineData.effectedMedicine![0].effectedMedicine.toString(),style: MyTextTheme().smallBCN)),
-
-                          ],
-                        ),*/
-                      ),
-                      const SizedBox(height: 15,),
-                      Container(
-                          padding: const EdgeInsets.only(left: 10,top: 60,right: 10),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Toxicity',
-                                  style: MyTextTheme().largeSCB.copyWith(
-                                      color: AppColor().text_blue
-                                  ),
-                                ),
-
-                              ]
-                          )
-                      ),
-                      const SizedBox(height: 15,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text('Nutrient',style: MyTextTheme().smallGCN,),
-                          Text('Symptom',style: MyTextTheme().smallGCN),
-                        ],
-                      ),
-                      const SizedBox(height: 2),
-                      Divider(color: AppColor().greyLight),
-                      const SizedBox(height: 10),
-
-                      Padding(
-                          padding: const EdgeInsets.fromLTRB(20,0,20,0),
-                          child: ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: (modal.controller.getDeficiencyDetailsList.toxicity??[]).length,
-                              shrinkWrap: true,
-                              itemBuilder: (BuildContext context, int index) {
-                                Toxicity toxicity= modal.controller.getDeficiencyDetailsList.toxicity![index];
-                                return Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(child: Text(toxicity.nutrient.toString(),style: MyTextTheme().smallBCB)),
-                                      Expanded(child: Text('',style: MyTextTheme().smallBCB)),
-                                      Expanded(child: Text(toxicity.symptom.toString(),style: MyTextTheme().smallBCN)),
-
-                                    ],
-
-                                  ),
-
-                                );
-                              }
-                          )
-                        /* child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(child: Text(effectedMedicineData.effectedMedicine![0].problemName.toString(),style: MyTextTheme().smallBCN)),
-                            Expanded(child: Text(effectedMedicineData.effectedMedicine![0].effectedMedicine.toString(),style: MyTextTheme().smallBCN)),
-
-                          ],
-                        ),*/
-                      ),
-
-
-                    ]
-                )
-            ),
-          ],
-        ),
-      );
-    }
-  );
 }

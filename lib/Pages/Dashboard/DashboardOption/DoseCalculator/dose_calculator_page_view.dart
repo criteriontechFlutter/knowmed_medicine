@@ -7,6 +7,7 @@ import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/my_custom_sd.dart';
 import 'package:knowmed/AppManager/my_text_field_2.dart';
+import 'package:knowmed/AppManager/widget/searchable_text_field.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/doseCalculatorController.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DoseCalculator/doseCalculatorModal.dart';
 import '../../../../AppManager/coloured_safe_area.dart';
@@ -126,7 +127,7 @@ doseCalculatorPart(context){
                 style: MyTextTheme().mediumPCB,),
               SizedBox(height: 10,),
 
-              MyTextField2(
+              SearchedTextField(
                 controller:modal.controller.medicineC.value,
                 searchedList:modal.controller.getAllMedicineList,
                 onTap: (){
@@ -140,6 +141,7 @@ doseCalculatorPart(context){
                     print(val.toString());
                     modal.controller.medicineId=val['id'];
                     modal.controller.onTapTest(val);
+                    modal.controller.updateAllMedicineList=[];
                     //print(modal.controller.testID.value.toString());
                     //FocusManager.instance.primaryFocus?.unfocus();
                     modal.controller.update();
@@ -147,11 +149,18 @@ doseCalculatorPart(context){
                 },
                 onChanged: (val) async {
                   print('this is value'+val.toString());
-                  if(val.toString().isNotEmpty) {
+
+
+
+                  if(  modal.controller.medicineId==0 &&val.toString().isNotEmpty) {
                    await modal.getAllMedicine(context);
 
                   }
                   else{
+                    if(  modal.controller.getAllMedicineList.isEmpty && val.toString().isNotEmpty){
+                      modal.controller.medicineId=0;
+                      modal.controller.update();
+                    }
                     modal.controller.updateAllMedicineList=[];
                     modal.controller.update();
                   }
@@ -184,11 +193,19 @@ doseCalculatorPart(context){
                 },
                 onChanged: (val) async {
                   print('this is value'+val.toString());
-                  if(val.toString().isNotEmpty) {
+
+
+
+
+                  if(  modal.controller.problemId==0 &&val.toString().isNotEmpty) {
                     await modal.getAllSymptom(context);
 
                   }
                   else{
+                    if(  modal.controller.getAllMedicineList.isEmpty && val.toString().isNotEmpty){
+                      modal.controller.problemId=0;
+                      modal.controller.update();
+                    }
                     modal.controller.updateAllSymptomList=[];
                     modal.controller.update();
                   }

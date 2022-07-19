@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:knowmed/AppManager/AlertDialogue.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/MyTextField.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
 import 'package:knowmed/AppManager/coloured_safe_area.dart';
-import 'package:knowmed/AppManager/common_widgets.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/Details/food_and_herb_details_page_view.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_And_Herb_Controller.dart';
+import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_Data_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/FoodAndHerbs/food_and_herb_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicine_Details/medicine_Details_View.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/Medicines/medicines_Data_Modal.dart';
@@ -122,7 +122,6 @@ class _FoodAndHerbPageViewState extends State<FoodAndHerbPageView> {
             init:FoodAndHerbController(),
             builder: (_) {
               return AlphabetWidget(
-                isVisible: modal.controller.alpha=="A-Z",
                 onTapAlphabet: (String alphabet){
                   setState(() {
                     modal.controller.alpha = alphabet;
@@ -144,27 +143,19 @@ class _FoodAndHerbPageViewState extends State<FoodAndHerbPageView> {
 
                   }
                 },
-                rightCornerList: CommonWidgets().showNoData(
-                  title: 'Medicine List Data Not Found',
-                  show: (modal.controller.getShowNoData &&
-                      modal.controller.getFoodAlphabet.isEmpty),
-                  loaderTitle: 'Loading Medicine List',
-                  showLoader: (!modal.controller.getShowNoData &&
-                      modal.controller.getFoodAlphabet.isEmpty),
-                  child: RightCornerLIstView(
-                    onTap: (MedicineDataModal val,int index){
-                      // App().navigate(context, MedicineDetails(
-                      //   index: index,
-                      // ));
-                      alertToast(context, "Work in progress");
-                    },
-                    dataList: modal.controller.getFoodAlphabet,
-                    parameter: "foodName",
-                  ),
+                rightCornerList: RightCornerLIstView(
+                  onTap: (FoodAndHerbDataModal val,int index){
+                    App().navigate(context, FoodAndHerbDetailsPageView(
+                      index: index,
+                    ));
+                  },
+                  dataList: modal.controller.getFoodAlphabet,
+                  parameter: "foodName",
                 ),
                 selectedAlphabet: modal.controller.alpha,
                 filterList: modal.controller.getFilterList,
                 filterParameter: "categoryName",
+                isVisible: modal.controller.alpha=="A-Z",
               );
             }
           ),
