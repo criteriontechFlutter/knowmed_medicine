@@ -168,7 +168,7 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                                 width: 20,
                                                 color: Colors.blue,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 8,
                                               ),
                                               Text(
@@ -178,8 +178,10 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                                     .copyWith(
                                                         color: Colors.blue),
                                               ),
+
                                             ],
                                           ),
+
                                           const SizedBox(
                                             height: 10,
                                           ),
@@ -187,33 +189,34 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                           const SizedBox(
                                             height: 5,
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            //mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Visibility(
-                                                  visible: modaldata
-                                                      .reference!.isNotEmpty,
-                                                  child: Column(
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      Text(
-                                                        'Ref:',
-                                                        style: MyTextTheme()
-                                                            .mediumBCB,
-                                                      ),
-                                                    ],
-                                                  )),
-                                              Expanded(
-                                                  child: Html(
-                                                data: modaldata.reference
-                                                    .toString(),
-                                              )),
-                                            ],
-                                          )
+
+                                          // Row(
+                                          //   crossAxisAlignment:
+                                          //       CrossAxisAlignment.start,
+                                          //   //mainAxisAlignment: MainAxisAlignment.start,
+                                          //   children: [
+                                          //     // Visibility(
+                                          //     //     visible: (modaldata
+                                          //     //         .reference??'')!='',
+                                          //     //     child: Column(
+                                          //     //       children: [
+                                          //     //         const SizedBox(
+                                          //     //           height: 8,
+                                          //     //         ),
+                                          //     //         Text(
+                                          //     //           'Ref:',
+                                          //     //           style: MyTextTheme()
+                                          //     //               .mediumBCB,
+                                          //     //         ),
+                                          //     //       ],
+                                          //     //     )),
+                                          //     // Expanded(
+                                          //     //     child: Html(
+                                          //     //   data: modaldata.reference
+                                          //     //       .toString(),
+                                          //     // )),
+                                          //   ],
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -262,7 +265,7 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                                       WidgetSpan(
                                                           child: Padding(
                                                               padding:
-                                                                  EdgeInsets
+                                                                  const EdgeInsets
                                                                       .fromLTRB(
                                                                           8,
                                                                           0,
@@ -329,12 +332,14 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
       switch (int.parse(medicine.headingId.toString())) {
         case 11:
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate((data as List).length, (index) {
               var newData = (data as List)[index];
 
               return Padding(
                   padding: const EdgeInsets.fromLTRB(15, 2, 10, 0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         newData['text'].toString(),
@@ -342,19 +347,37 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                       ),
                       Text(newData['value'].toString(),
                           style: MyTextTheme().smallBCN),
+                      const SizedBox(height: 5,),
+                      Text('Sub Overview:',style: MyTextTheme().smallBCB,),
+
+                      Column(
+                        children: List.generate(medicine.subOverview!.length, (index2){
+                          var overview=medicine.subOverview![index2];
+                          return Column(
+                            children: [
+                              Column(
+                                children: List.generate(overview.subOverview!.length, (index){
+                                  var subOverview=overview.subOverview![index2];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundColor: AppColor().black,
+                                          radius: 2,
+                                        ),
+                                    Expanded(child: Html(data:subOverview.subOverview.toString()))
+                                      ],
+                                    ),
+                                  );
+                                }),
+                              )
+                            ],
+                          );
+                        }),
+                      )
                     ],
-                  )
-                  // child: Row(
-                  //   children: [
-                  //     CircleAvatar(
-                  //       radius: 2,
-                  //       backgroundColor: AppColor().black,
-                  //     ),
-                  //     const SizedBox(width: 5,),
-                  //     (newData['problemName'] == '')?const Text(""):
-                  //     Expanded(child: Text(newData['problemName'].toString(),style: MyTextTheme().smallBCN)),
-                  //   ],
-                  // ),
+                  ),
                   );
             }),
           );
@@ -374,7 +397,7 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                     style: MyTextTheme().smallBCB,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 10),
                     child: Column(
                       children:
                           List.generate(newData.concern!.length, (index2) {
@@ -437,6 +460,10 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                   Text("Result",style: MyTextTheme().smallBCN)
                                 ],
                               ),
+                              Divider(
+                                color: AppColor().greyLight,
+                                thickness: 0.5,
+                              ),
                               Column(
                               children: List.generate(
                                   newData.investigation![index2].data!.length, (index3) {
@@ -444,10 +471,11 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                 return Column(
                                   children: [
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0,2,0,2),
+                                  padding: const EdgeInsets.fromLTRB(0,10,0,2),
                                   child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Expanded(child: Text(daigonasticData.testName.toString(),style: MyTextTheme().smallBCN)),
                                   Expanded(child: Text(daigonasticData.subTestName.toString(),style: MyTextTheme().smallBCN)),
                                   Expanded(child: Text(daigonasticData.propertyValue.toString(),style: MyTextTheme().smallBCN)),
                                   Expanded(child: Text(daigonasticData.remarkValue.toString(),style: MyTextTheme().smallBCN)),
@@ -471,226 +499,286 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
           );
 
         case 15:
-          List<IntractionDataModal> intractionData =
-              List<IntractionDataModal>.from((data)
-                  .map((element) => IntractionDataModal.fromJson(element)));
+          List<TreatmentDataModal> treatment =
+          List<TreatmentDataModal>.from((data).map(
+                  (element) => TreatmentDataModal.fromJson(element)));
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Visibility(
-                visible: intractionData[0].interactionWithMedicine!.isNotEmpty,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text(
-                        'With Medicine',
-                        style: MyTextTheme().mediumBCB,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: List.generate(
-                    intractionData[0].interactionWithMedicine!.length, (index) {
-                  var newData =
-                      intractionData[0].interactionWithMedicine![index];
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 5, 8, 0),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 2,
-                              backgroundColor: AppColor().black,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                                child: Text(
-                              newData.interactionWithMedicine.toString(),
-                              style: MyTextTheme().smallBCN,
-                            )),
-                          ],
-                        ),
-                      )
-                    ],
-                  );
-                }),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Visibility(
-                visible:
-                    intractionData[0].interactionWithMedicineGroup!.isNotEmpty,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text(
-                        'With Medicine Group',
-                        style: MyTextTheme().mediumBCB,
-                      ),
-                    ),
-                    Column(
-                      children: List.generate(
-                          intractionData[0]
-                              .interactionWithMedicineGroup!
-                              .length, (index) {
-                        var newData = intractionData[0]
-                            .interactionWithMedicineGroup![index];
-
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(25, 5, 8, 0),
-                              child: Row(
+            children: List.generate(treatment.length, (index) {
+              var newData = treatment[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.subHeading.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.data!.length, (index2) {
+                        return
+                          Column(
+                            children: List.generate(
+                                newData.data![index2].treatmentType!.length, (index3) {
+                              var treatmentData = newData.data![index2].treatmentType![index3];
+                              return Column(
                                 children: [
-                                  CircleAvatar(
-                                    radius: 2,
-                                    backgroundColor: AppColor().black,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                      child: Text(
-                                    newData.interactionWithMedicineGroup
-                                        .toString(),
-                                    style: MyTextTheme().smallBCN,
-                                  )),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(0,4,5,0),
+                                        child: CircleAvatar(
+                                          radius: 2,
+                                          backgroundColor: AppColor().black,
+                                        ),
+                                      ),
+                                      Expanded(child: Text(treatmentData.treatmentType.toString(),style: MyTextTheme().smallBCN,))
+                                    ],
+                                  )
+
                                 ],
-                              ),
-                            )
-                          ],
-                        );
+                              );
+
+                            }),
+
+                          );
                       }),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Visibility(
-                visible: intractionData[0].interactionWithNurient!.isNotEmpty,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Text(
-                        'With Nurient',
-                        style: MyTextTheme().mediumBCB,
-                      ),
-                    ),
-                    Column(
-                      children: List.generate(
-                          intractionData[0].interactionWithNurient!.length,
-                          (index) {
-                        var newData =
-                            intractionData[0].interactionWithNurient![index];
-
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(25, 5, 8, 0),
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 2,
-                                    backgroundColor: AppColor().black,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                      child: Text(
-                                    newData.interactionWithNutrient.toString(),
-                                    style: MyTextTheme().smallBCN,
-                                  )),
-                                ],
-                              ),
-                            )
-                          ],
-                        );
-                      }),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
+              );
+            }),
           );
 
         case 18:
+          List<ConcernsDataModal> concerns =
+          List<ConcernsDataModal>.from((data).map(
+                  (element) => ConcernsDataModal.fromJson(element)));
           return Column(
-            children: List.generate((data as List).length, (index) {
-              var newData = (data as List)[index];
+            children: List.generate(concerns.length, (index) {
+              var newData = concerns[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.subHeading.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.data!.length, (index2) {
+                        return
+                          Column(
+                            children: List.generate(
+                                (newData.data![index2].precautionType?? []).length, (index3) {
+                              var concernsData = newData.data![index2].precautionType![index3];
+                              return Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(0,4,5,0),
+                                        child: CircleAvatar(
+                                          radius: 2,
+                                          backgroundColor: AppColor().black,
+                                        ),
+                                      ),
+                                      Expanded(child: Text(concernsData.concernType.toString(),style: MyTextTheme().smallBCN,))
+                                    ],
+                                  )
 
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(18, 5, 0, 0),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 2,
-                      backgroundColor: AppColor().black,
+                                ],
+                              );
+
+                            }),
+
+                          );
+                      }),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      newData['text'].toString(),
-                      style: MyTextTheme().mediumBCB,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      newData['value'].toString(),
-                      style: MyTextTheme().smallBCN,
-                    )
-                  ],
-                ),
+                  ),
+                ],
               );
             }),
           );
 
         case 20:
+          List<DietDataModal> diet =
+          List<DietDataModal>.from((data).map(
+                  (element) => DietDataModal.fromJson(element)));
           return Column(
-            children: List.generate((data as List).length, (index) {
-              var newData = (data as List)[index];
-
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 2,
-                      backgroundColor: AppColor().black,
+            children: List.generate(diet.length, (index) {
+              var newData = diet[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.departmentName.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.provisionalDiet!.length, (index2) {
+                        var provisionalDiet=newData.provisionalDiet![index2];
+                        return Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0,4,5,0),
+                                  child: CircleAvatar(
+                                    radius: 2,
+                                    backgroundColor: AppColor().black,
+                                  ),
+                                ),
+                                Expanded(child: Text(provisionalDiet.provisionalDiet.toString(),style: MyTextTheme().smallBCN,))
+                              ],
+                            )
+                          ],
+                        );
+                      }),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                        child: Text(
-                      newData['precautions'].toString(),
-                      style: MyTextTheme().smallBCN,
-                    )),
-                  ],
-                ),
+                  ),
+                ],
               );
             }),
           );
-
+        case 21:
+          List<RelatedDiseaseDataModal> relatedDisease =
+          List<RelatedDiseaseDataModal>.from((data).map(
+                  (element) => RelatedDiseaseDataModal.fromJson(element)));
+          return Column(
+            children: List.generate(relatedDisease.length, (index) {
+              var newData = relatedDisease[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.departmentName.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.differentialDiagnosis!.length, (index2) {
+                        var relatedDieaseData=newData.differentialDiagnosis![index2];
+                        return Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0,4,5,0),
+                                  child: CircleAvatar(
+                                    radius: 2,
+                                    backgroundColor: AppColor().black,
+                                  ),
+                                ),
+                                Expanded(child: Text(relatedDieaseData.differentialDiagnosis.toString(),style: MyTextTheme().smallBCN,))
+                              ],
+                            )
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          );
+        case 28:
+          List<PathophysiologyDataModal> pathophysiology =
+          List<PathophysiologyDataModal>.from((data).map(
+                  (element) => PathophysiologyDataModal.fromJson(element)));
+          return Column(
+            children: List.generate(pathophysiology.length, (index) {
+              var newData = pathophysiology[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.departmentName.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.pathophysiology!.length, (index2) {
+                        var pathophysiologyData=newData.pathophysiology![index2];
+                        return Column(
+                          children: [
+                            Text(pathophysiologyData.pathophysiology.toString(),style: MyTextTheme().smallBCN,)
+                          ],
+                        );
+                      }),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          );
+        // case 30:
+        //   List<EpidemiologyDataModal> epidemiology =
+        //   List<EpidemiologyDataModal>.from((data).map(
+        //           (element) => EpidemiologyDataModal.fromJson(element)));
+        //   return Column(
+        //     children: List.generate(epidemiology.length, (index) {
+        //       var newData = epidemiology[index];
+        //       return Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           Text(
+        //             newData.subHeading.toString(),
+        //             style: MyTextTheme().smallBCB,
+        //           ),
+        //           Padding(
+        //             padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+        //             child: Column(
+        //               children:
+        //               List.generate(newData.data!.length, (index2) {
+        //                 return
+        //                   Column(
+        //                     children: List.generate(
+        //                         (newData.data![index2].precautionType?? []).length, (index3) {
+        //                       var concernsData = newData.data![index2].precautionType![index3];
+        //                       return Column(
+        //                         children: [
+        //                           Row(
+        //                             crossAxisAlignment: CrossAxisAlignment.start,
+        //                             children: [
+        //                               Padding(
+        //                                 padding: const EdgeInsets.fromLTRB(0,4,5,0),
+        //                                 child: CircleAvatar(
+        //                                   radius: 2,
+        //                                   backgroundColor: AppColor().black,
+        //                                 ),
+        //                               ),
+        //                               Expanded(child: Text(concernsData.concernType.toString(),style: MyTextTheme().smallBCN,))
+        //                             ],
+        //                           )
+        //
+        //                         ],
+        //                       );
+        //
+        //                     }),
+        //
+        //                   );
+        //               }),
+        //             ),
+        //           ),
+        //         ],
+        //       );
+        //     }),
+        //   );
         default:
           return Container();
       }

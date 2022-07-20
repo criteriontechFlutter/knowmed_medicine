@@ -185,8 +185,393 @@ class DiagnosticsData {
 
 
 
+// Treatment Data Modal
 
 
+
+class TreatmentDataModal {
+  String? subHeading;
+  List<TreatmentData>? data;
+
+  TreatmentDataModal({this.subHeading, this.data});
+
+  TreatmentDataModal.fromJson(Map<String, dynamic> json) {
+    subHeading = json['subHeading'];
+    if (json['data'] != null) {
+      data = <TreatmentData>[];
+      json['data'].forEach((v) {
+        data!.add(new TreatmentData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subHeading'] = this.subHeading;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class TreatmentData {
+  String? departmentId;
+  String? departmentName;
+  List<TreatmentType>? treatmentType;
+
+  TreatmentData({this.departmentId, this.departmentName, this.treatmentType});
+
+  TreatmentData.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['treatmentType'] != null) {
+      treatmentType = <TreatmentType>[];
+      json['treatmentType'].forEach((v) {
+        treatmentType!.add(new TreatmentType.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.treatmentType != null) {
+      data['treatmentType'] =
+          this.treatmentType!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class TreatmentType {
+  String? treatmentType;
+
+  TreatmentType({this.treatmentType});
+
+  TreatmentType.fromJson(Map<String, dynamic> json) {
+    treatmentType = json['treatmentType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['treatmentType'] = this.treatmentType;
+    return data;
+  }
+}
+
+
+
+//  Concerns Data Modal
+
+
+class ConcernsDataModal {
+  String? subHeading;
+  List<ConcernsData>? data;
+
+  ConcernsDataModal({this.subHeading, this.data});
+
+  ConcernsDataModal.fromJson(Map<String, dynamic> json) {
+    subHeading = json['subHeading'];
+    if (json['data'] != null) {
+      data = <ConcernsData>[];
+      json['data'].forEach((v) {
+        data!.add(new ConcernsData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subHeading'] = this.subHeading;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ConcernsData {
+  String? departmentId;
+  String? departmentName;
+  List<PrecautionType>? precautionType;
+
+  ConcernsData({this.departmentId, this.departmentName, this.precautionType});
+
+  ConcernsData.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['precautionType'] != null) {
+      precautionType = <PrecautionType>[];
+      json['precautionType'].forEach((v) {
+        precautionType!.add(new PrecautionType.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.precautionType != null) {
+      data['precautionType'] =
+          this.precautionType!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class PrecautionType {
+  String? concernType;
+
+  PrecautionType({this.concernType});
+
+  PrecautionType.fromJson(Map<String, dynamic> json) {
+    concernType = json['concernType'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['concernType'] = this.concernType;
+    return data;
+  }
+}
+
+
+
+
+//  Diet Data Modal
+
+
+class DietDataModal {
+  String? departmentId;
+  String? departmentName;
+  List<ProvisionalDiet>? provisionalDiet;
+
+  DietDataModal({this.departmentId, this.departmentName, this.provisionalDiet});
+
+  DietDataModal.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['provisionalDiet'] != null) {
+      provisionalDiet = <ProvisionalDiet>[];
+      json['provisionalDiet'].forEach((v) {
+        provisionalDiet!.add(new ProvisionalDiet.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.provisionalDiet != null) {
+      data['provisionalDiet'] =
+          this.provisionalDiet!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ProvisionalDiet {
+  String? provisionalDiet;
+
+  ProvisionalDiet({this.provisionalDiet});
+
+  ProvisionalDiet.fromJson(Map<String, dynamic> json) {
+    provisionalDiet = json['provisionalDiet'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['provisionalDiet'] = this.provisionalDiet;
+    return data;
+  }
+}
+
+
+
+//Related Disease Data Modal
+
+
+class RelatedDiseaseDataModal {
+  String? departmentId;
+  String? departmentName;
+  List<DifferentialDiagnosis>? differentialDiagnosis;
+
+  RelatedDiseaseDataModal(
+      {this.departmentId, this.departmentName, this.differentialDiagnosis});
+
+  RelatedDiseaseDataModal.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['differentialDiagnosis'] != null) {
+      differentialDiagnosis = <DifferentialDiagnosis>[];
+      json['differentialDiagnosis'].forEach((v) {
+        differentialDiagnosis!.add(new DifferentialDiagnosis.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.differentialDiagnosis != null) {
+      data['differentialDiagnosis'] =
+          this.differentialDiagnosis!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class DifferentialDiagnosis {
+  String? differentialDiagnosis;
+
+  DifferentialDiagnosis({this.differentialDiagnosis});
+
+  DifferentialDiagnosis.fromJson(Map<String, dynamic> json) {
+    differentialDiagnosis = json['differentialDiagnosis'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['differentialDiagnosis'] = this.differentialDiagnosis;
+    return data;
+  }
+}
+
+
+// Pathophysiology Data Modal
+
+
+class PathophysiologyDataModal {
+  String? departmentId;
+  String? departmentName;
+  List<Pathophysiology>? pathophysiology;
+
+  PathophysiologyDataModal(
+      {this.departmentId, this.departmentName, this.pathophysiology});
+
+  PathophysiologyDataModal.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['pathophysiology'] != null) {
+      pathophysiology = <Pathophysiology>[];
+      json['pathophysiology'].forEach((v) {
+        pathophysiology!.add(new Pathophysiology.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.pathophysiology != null) {
+      data['pathophysiology'] =
+          this.pathophysiology!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Pathophysiology {
+  String? pathophysiology;
+  String? pathophysiologyAttachment;
+
+  Pathophysiology({this.pathophysiology, this.pathophysiologyAttachment});
+
+  Pathophysiology.fromJson(Map<String, dynamic> json) {
+    pathophysiology = json['pathophysiology'];
+    pathophysiologyAttachment = json['pathophysiologyAttachment'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['pathophysiology'] = this.pathophysiology;
+    data['pathophysiologyAttachment'] = this.pathophysiologyAttachment;
+    return data;
+  }
+}
+
+
+
+
+// Epidemiology Data Modal
+
+
+class EpidemiologyDataModal {
+  String? subHeading;
+  List<EpidemiologyData>? data;
+
+  EpidemiologyDataModal({this.subHeading, this.data});
+
+  EpidemiologyDataModal.fromJson(Map<String, dynamic> json) {
+    subHeading = json['subHeading'];
+    if (json['data'] != null) {
+      data = <EpidemiologyData>[];
+      json['data'].forEach((v) {
+        data!.add(new EpidemiologyData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subHeading'] = this.subHeading;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class EpidemiologyData {
+  String? departmentId;
+  String? departmentName;
+  List<Prognosis>? prognosis;
+
+  EpidemiologyData({this.departmentId, this.departmentName, this.prognosis});
+
+  EpidemiologyData.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['prognosis'] != null) {
+      prognosis = <Prognosis>[];
+      json['prognosis'].forEach((v) {
+        prognosis!.add(new Prognosis.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.prognosis != null) {
+      data['prognosis'] = this.prognosis!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Prognosis {
+  String? prognosis;
+
+  Prognosis({this.prognosis});
+
+  Prognosis.fromJson(Map<String, dynamic> json) {
+    prognosis = json['prognosis'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['prognosis'] = this.prognosis;
+    return data;
+  }
+}
 
 
 
@@ -205,27 +590,104 @@ class DiseaseDetailsDataModal {
   dynamic body;
   String? reference;
   String? imagePath;
+  List<SubOverview>? subOverview;
 
-  DiseaseDetailsDataModal({this.headingId, this.heading, this.body, this.reference, this.imagePath});
+  DiseaseDetailsDataModal(
+      {this.headingId,
+        this.heading,
+        this.body,
+        this.imagePath,
+        this.subOverview});
 
   DiseaseDetailsDataModal.fromJson(Map<String, dynamic> json) {
     headingId = json['headingId'];
     heading = json['heading'];
     body = json['body'];
     imagePath = json['imagePath'];
-    reference = json['reference']??'';
+    if (json['subOverview'] != null) {
+      subOverview = <SubOverview>[];
+      json['subOverview'].forEach((v) {
+        subOverview!.add(new SubOverview.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['headingId'] = headingId;
-    data['heading'] = heading;
-    data['body'] = body;
-    data['imagePath'] = imagePath;
-    data['reference'] = reference;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['headingId'] = this.headingId;
+    data['heading'] = this.heading;
+    data['body'] = this.body;
+    data['imagePath'] = this.imagePath;
+    if (this.subOverview != null) {
+      data['subOverview'] = this.subOverview!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
+
+
+
+
+class SubOverview {
+  int? departmentId;
+  String? departmentName;
+  List<SubOverviewData>? subOverview;
+
+  SubOverview({this.departmentId, this.departmentName, this.subOverview});
+
+  SubOverview.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['subOverview'] != null) {
+      subOverview = <SubOverviewData>[];
+      json['subOverview'].forEach((v) {
+        subOverview!.add(new SubOverviewData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.subOverview != null) {
+      data['subOverview'] = this.subOverview!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class SubOverviewData {
+  String? subOverview;
+
+  SubOverviewData({this.subOverview});
+
+  SubOverviewData.fromJson(Map<String, dynamic> json) {
+    subOverview = json['subOverview'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subOverview'] = this.subOverview;
+    return data;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Dosing data Modal
 

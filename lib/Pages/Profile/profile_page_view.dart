@@ -280,13 +280,13 @@ class _ProfilePageViewState extends State<ProfilePageViewNew>{
             Positioned(
               top: 30,
               child: Container(
-                width: 150,
+                width: 70,
                 height: 30,
                 color: Colors.white,
                 margin: const EdgeInsets.only(left: 40,top: 20),
                 child: Column(
                   children: [
-                    Text('Registration Details',
+                    Text('Profile',
                       style: MyTextTheme().mediumWCB.copyWith(
                           color: AppColor().primaryColor
                       ),

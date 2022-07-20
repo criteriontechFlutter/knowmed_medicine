@@ -9,6 +9,7 @@ import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
 import 'package:knowmed/AppManager/appUtils.dart';
+import 'package:knowmed/Pages/Forgot%20Password/forgetController.dart';
 import 'package:knowmed/Pages/Registration/registration_Controller.dart';
 
 import '../../AppManager/NewTextField.dart';
@@ -37,7 +38,7 @@ ForgetView(BuildContext context) {
 
               backgroundColor: AppColor().white,
               title:GetBuilder(
-                  init: RegistrationController(),
+                  init: ForgetController(),
                   builder: (_) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

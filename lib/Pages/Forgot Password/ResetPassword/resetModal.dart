@@ -28,7 +28,7 @@ class ResetModal {
     print('kkkkkkkkkkkkkk'+data.toString());
 
     if(data['responseCode']==1) {
-      // alertToast(context, data['responseMessage']);
+       alertToast(context, data['responseMessage']);
       Navigator.pop(context);
       //app.replaceNavigate(context, const LoginPageView());
     }else{

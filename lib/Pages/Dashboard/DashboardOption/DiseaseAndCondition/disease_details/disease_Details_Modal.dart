@@ -18,12 +18,12 @@ class DiseaseDetailsModal{
   diseaseDetails(context, int index)async{
 
     var body={
-      //"userId":UserData().getUserData.id.toString(),
-     // "departmentId":controller2.getDiseaseAlphabet[index].id.toString(),
-     // "problemId":controller2.getDiseaseAlphabet[index].id.toString()
-      "departmentId":"9",
-      "problemId":"222",
-      "userId":"120",
+      "userId":UserData().getUserData.id.toString(),
+    // "departmentId":controller2.getDiseaseAlphabet[index].id.toString(),
+     "problemId":controller2.getDiseaseAlphabet[index].id.toString()
+     //  "departmentId":"9",
+     //  "problemId":"222",
+     //  "userId":"120",
 
     };
 
