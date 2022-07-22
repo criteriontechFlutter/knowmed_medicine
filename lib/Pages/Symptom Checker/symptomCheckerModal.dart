@@ -74,6 +74,25 @@ int i=0;
 
   }
 
+  
+  onTapProblemSearch(context)async {
+    
+    var body={
+      "alphabet":controller.searchC.value.text.toString(),
+      "userId":"120"
+    };
+    
+    var data=await rawData.api('Knowmed/getAllProblemList', body, context,token: true);
+    controller.updateSuggestedSearchList=data['responseValue'];
+    print("alphabet: " + controller.searchC.value.text.toString(),);
+    print("Search & add problem"+data.toString());
+  }
+  
+  
+  
+  
+  
+  
   onSuggestedProblem(context)async{
     var body={
       "problemId":""
@@ -90,15 +109,34 @@ int i=0;
   }
 
   onSuggestProblemTap(int index){
-    if(controller.unlocalizedProblemId.contains(controller.getSuggestedProblemList[index].id)){
-      controller.unlocalizedProblemId.remove(controller.getSuggestedProblemList[index].id);
+    if(controller.unlocalizedProblemId.contains(controller.getSuggestedProblemList[index]['id'].toString())){
+      controller.unlocalizedProblemId.remove(controller.getSuggestedProblemList[index]['id'].toString());
       controller.update();
     }else{
-      controller.unlocalizedProblemId.add(controller.getSuggestedProblemList[index].id);
+      controller.unlocalizedProblemId.add(controller.getSuggestedProblemList[index]['id'].toString());
       controller.update();
       print("Unlocalized List :"+controller.unlocalizedProblemId.toString());
     }
   }
+
+
+  //On tap Disease you suffered search
+
+
+  onTapDiseaseSearch(context)async {
+
+    var body={
+      "alphabet":controller.diseaseSearchC.value.text.toString(),
+      "userId":"120"
+    };
+
+    var data=await rawData.api('Knowmed/getAllDiseaseByAlphabet', body, context,token: true);
+    controller.updateDiseaseSearchList=data['responseValue'];
+    //print("alphabet: " + controller.searchC.value.text.toString(),);
+    print("Search Disease"+data.toString());
+  }
+
+
 
 
 
@@ -114,11 +152,11 @@ int i=0;
   }
 
   onTapDisease(int index){
-    if(controller.diseaseSufferedId.contains(controller.getAddOtherDiseaseList[index].id)){
-      controller.diseaseSufferedId.remove(controller.getAddOtherDiseaseList[index].id);
+    if(controller.diseaseSufferedId.contains(controller.getAddOtherDiseaseList[index]['id'].toString())){
+      controller.diseaseSufferedId.remove(controller.getAddOtherDiseaseList[index]['id'].toString());
       controller.update();
     }else{
-      controller.diseaseSufferedId.add(controller.getAddOtherDiseaseList[index].id);
+      controller.diseaseSufferedId.add(controller.getAddOtherDiseaseList[index]['id'].toString());
       controller.update();
       print("Disease List: "+controller.diseaseSufferedId.toString());
     }

@@ -168,7 +168,6 @@ class _DiseaseListPageViewState extends State<DiseaseListPageView> {
                       ),
                     ),
                     selectedAlphabet: modal.controller.alpha,
-                    filterList: modal.controller.getFilterList,
                   ),
                 ),
 

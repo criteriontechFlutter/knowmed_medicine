@@ -21,18 +21,18 @@ class DiseaseController extends GetxController{
   }
 
 
-  List filterList=[].obs;
-
-  List get getFilterList =>filterList;
-  set updateFilterList(List val){
-    filterList=val;
-    filterList.insert(
-        0,
-        {
-      "id": 0, "groupName": "Select Filter"
-    });
-    update();
-  }
+  // List filterList=[].obs;
+  //
+  // List get getFilterList =>filterList;
+  // set updateFilterList(List val){
+  //   filterList=val;
+  //   filterList.insert(
+  //       0,
+  //       {
+  //     "id": 0, "groupName": "Select Filter"
+  //   });
+  //   update();
+  // }
 
 
   List diseaseAlphabet = [].obs;

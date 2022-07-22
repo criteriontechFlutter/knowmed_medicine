@@ -14,19 +14,7 @@ class DiseaseModal{
   RawData rawData=RawData();
 
 
-  // medicineFilter(context)async {
-  //
-  //   var body={
-  //     "userId":UserData().getUserData.id.toString(),
-  //   };
-  //
-  //   var data=await rawData.api('Knowmed/getAllMedicineGroup', body, context,token: true);
-  //   print('fffffffffffffffffffff'+data.toString());
-  //   controller.updateFilterList=data['responseValue'];
-  //   print('groupId: '+ controller.getMedicineGroupId.toString());
-  //
-  //   //print("Alphabets are: " + alphabets.toString());
-  // }
+
 
 
 

@@ -266,6 +266,8 @@ class TreatmentType {
 //  Concerns Data Modal
 
 
+
+
 class ConcernsDataModal {
   String? subHeading;
   List<ConcernsData>? data;
@@ -295,17 +297,17 @@ class ConcernsDataModal {
 class ConcernsData {
   String? departmentId;
   String? departmentName;
-  List<PrecautionType>? precautionType;
+  List<ConcernType>? concernType;
 
-  ConcernsData({this.departmentId, this.departmentName, this.precautionType});
+  ConcernsData({this.departmentId, this.departmentName, this.concernType});
 
   ConcernsData.fromJson(Map<String, dynamic> json) {
     departmentId = json['departmentId'];
     departmentName = json['departmentName'];
-    if (json['precautionType'] != null) {
-      precautionType = <PrecautionType>[];
-      json['precautionType'].forEach((v) {
-        precautionType!.add(new PrecautionType.fromJson(v));
+    if (json['concernType'] != null) {
+      concernType = <ConcernType>[];
+      json['concernType'].forEach((v) {
+        concernType!.add(new ConcernType.fromJson(v));
       });
     }
   }
@@ -314,20 +316,19 @@ class ConcernsData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['departmentId'] = this.departmentId;
     data['departmentName'] = this.departmentName;
-    if (this.precautionType != null) {
-      data['precautionType'] =
-          this.precautionType!.map((v) => v.toJson()).toList();
+    if (this.concernType != null) {
+      data['concernType'] = this.concernType!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class PrecautionType {
+class ConcernType {
   String? concernType;
 
-  PrecautionType({this.concernType});
+  ConcernType({this.concernType});
 
-  PrecautionType.fromJson(Map<String, dynamic> json) {
+  ConcernType.fromJson(Map<String, dynamic> json) {
     concernType = json['concernType'];
   }
 
@@ -339,9 +340,7 @@ class PrecautionType {
 }
 
 
-
-
-//  Diet Data Modal
+//Diet data Modal
 
 
 class DietDataModal {
@@ -572,6 +571,143 @@ class Prognosis {
     return data;
   }
 }
+
+
+
+// Metabolic Pathway Data Modal
+
+
+
+
+class MetabolicPathwayDataModal {
+  String? subHeading;
+  List<MetabolicData>? data;
+
+  MetabolicPathwayDataModal({this.subHeading, this.data});
+
+  MetabolicPathwayDataModal.fromJson(Map<String, dynamic> json) {
+    subHeading = json['subHeading'];
+    if (json['data'] != null) {
+      data = <MetabolicData>[];
+      json['data'].forEach((v) {
+        data!.add(new MetabolicData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['subHeading'] = this.subHeading;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class MetabolicData {
+  String? departmentId;
+  String? departmentName;
+  List<MetabolicPathway>? metabolicPathway;
+
+  MetabolicData({this.departmentId, this.departmentName, this.metabolicPathway});
+
+  MetabolicData.fromJson(Map<String, dynamic> json) {
+    departmentId = json['departmentId'];
+    departmentName = json['departmentName'];
+    if (json['metabolicPathway'] != null) {
+      metabolicPathway = <MetabolicPathway>[];
+      json['metabolicPathway'].forEach((v) {
+        metabolicPathway!.add(new MetabolicPathway.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['departmentId'] = this.departmentId;
+    data['departmentName'] = this.departmentName;
+    if (this.metabolicPathway != null) {
+      data['metabolicPathway'] =
+          this.metabolicPathway!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class MetabolicPathway {
+  String? metabolismName;
+  String? cycleName;
+  String? enzymeName;
+  String? metaboliteName;
+  String? disorderDescription;
+  String? testDetails;
+  String? treatmentDetails;
+  String? tissue;
+  String? biofluids;
+  String? cellLocation;
+  String? inheretance;
+  String? prevalence;
+  String? fate;
+  String? feeder;
+
+  MetabolicPathway(
+      {this.metabolismName,
+        this.cycleName,
+        this.enzymeName,
+        this.metaboliteName,
+        this.disorderDescription,
+        this.testDetails,
+        this.treatmentDetails,
+        this.tissue,
+        this.biofluids,
+        this.cellLocation,
+        this.inheretance,
+        this.prevalence,
+        this.fate,
+        this.feeder});
+
+  MetabolicPathway.fromJson(Map<String, dynamic> json) {
+    metabolismName = json['metabolismName'];
+    cycleName = json['cycleName'];
+    enzymeName = json['enzymeName'];
+    metaboliteName = json['metaboliteName'];
+    disorderDescription = json['disorderDescription'];
+    testDetails = json['testDetails'];
+    treatmentDetails = json['treatmentDetails'];
+    tissue = json['tissue'];
+    biofluids = json['biofluids'];
+    cellLocation = json['cellLocation'];
+    inheretance = json['inheretance'];
+    prevalence = json['prevalence'];
+    fate = json['fate'];
+    feeder = json['feeder'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['metabolismName'] = this.metabolismName;
+    data['cycleName'] = this.cycleName;
+    data['enzymeName'] = this.enzymeName;
+    data['metaboliteName'] = this.metaboliteName;
+    data['disorderDescription'] = this.disorderDescription;
+    data['testDetails'] = this.testDetails;
+    data['treatmentDetails'] = this.treatmentDetails;
+    data['tissue'] = this.tissue;
+    data['biofluids'] = this.biofluids;
+    data['cellLocation'] = this.cellLocation;
+    data['inheretance'] = this.inheretance;
+    data['prevalence'] = this.prevalence;
+    data['fate'] = this.fate;
+    data['feeder'] = this.feeder;
+    return data;
+  }
+}
+
+
+
+
+
 
 
 

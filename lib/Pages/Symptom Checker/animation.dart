@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:knowmed/AppManager/Button.dart';
 import 'package:knowmed/AppManager/MtTextTheme.dart';
 import 'package:knowmed/AppManager/appColors.dart';
@@ -46,6 +45,11 @@ BodyPart selectedBodyPart =BodyPart.notSelected;
   }
   get()async{
     await modal.onAddAnyOtherDisease(context);
+    await modal.onSuggestedProblem(context);
+
+    modal.onTapProblemSearch(context);
+
+
   }
   @override
   void dispose() {
@@ -153,7 +157,7 @@ int count =0;
                     else if(count==2){
 
 
-                      await modal.onSuggestedProblem(context);
+
                       modal.controller.update();
                     }
                   }),
@@ -198,7 +202,7 @@ int count =0;
                           children: List.generate(
                               modal.controller.getAllSymptomsList.length,
                                   (index) {
-                                    SuggestedUnlocalizedProblemDataModal symptomsData=modal.controller.getAllSymptomsList[index];
+                                    SymptomRelatedBodyPartDataModal symptomsData=modal.controller.getAllSymptomsList[index];
                                     //print('arsalan'+symptomsData.id.toString());
                                 return Padding(
                                   padding:
@@ -287,32 +291,97 @@ int count =0;
       builder: (_) {
         return Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 60, 0, 10),
-                child: Text("Suggested Unlocalized Problems",
-                    style: MyTextTheme().mediumBCB),
-              ),
-              MyTextField2(
-                hintText: "Search & add problems",
-                controller: modal.controller.searchC.value,
-                suffixIcon:
-                const Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(Icons.search, color: Colors.grey, size: 25),
-                ),
-                onChanged: (val){
-                  setState(() {
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 60, 0, 10),
+                    child: Text("Suggested Unlocalized Problems",
+                        style: MyTextTheme().mediumBCB),
+                  ),
+                  MyTextField2(
+                    hintText: "Search & add problems",
+                    controller: modal.controller.searchC.value,
+                    suffixIcon:
+                    const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(Icons.search, color: Colors.grey, size: 25),
+                    ),
+                    onChanged: (val){
+                      setState((){
+                      //modal.onTapProblemSearch(context);
+                      });
+                    },
 
-                  });
-                },
+                  ),
+                  Expanded(
+                      child:GridView.builder(
+                        reverse: true,
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 7 / 2,
+                              crossAxisSpacing: 5,
+                              mainAxisSpacing: 5),
+                          padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
+                          itemCount: modal.controller.getSuggestedProblemList.length,
+                          itemBuilder: (BuildContext ctx, index) {
+                            // SuggestedUnlocalizedProblemDataModal allProblems=modal.controller.getSuggestedProblemList[index];
+                            return InkWell(
+                              onTap: (){
+                                setState(() {
+                                  modal.onSuggestProblemTap(index);
+                                  modal.controller.searchC.value.clear();
+                                });
+                              },
+                              child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    color: modal.controller.unlocalizedProblemId.contains(modal.controller.getSuggestedProblemList[index]['id'].toString())?Colors.lightGreen:Colors.yellow.shade50,
+                                    // color: Colors.yellow.shade50,
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow:  [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        blurRadius: 2,
+                                        blurStyle: BlurStyle.solid,
+                                        offset: Offset(1.0,1.0),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    modal.controller.getSuggestedProblemList[index]['problemName'].toString(),
+                                    style:
+                                    MyTextTheme().smallBCN.copyWith(fontSize: 12),
+                                  )),
+                            );
+                          })
 
-              ),
-              Expanded(
-                child:   GridView.builder(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                    child: Text("Add any other disease you suffered from",
+                        style: MyTextTheme().mediumBCB),
+                  ),
+                  MyTextField2(
+                    hintText: "Search disease",
+                    suffixIcon:
+                    const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(Icons.search, color: Colors.grey, size: 25),
+                    ),
+                    controller: modal.controller.diseaseSearchC.value,
+                    onChanged: (val){
+                      setState(() {
+                       modal.onTapDiseaseSearch(context);
+                      });
+                    },
+                  ),
+                  Expanded(
+                    child: GridView.builder(
                         gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
@@ -320,130 +389,107 @@ int count =0;
                             crossAxisSpacing: 5,
                             mainAxisSpacing: 5),
                         padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
-                        itemCount: modal.controller.getSuggestedProblemList.length,
+                        itemCount: modal.controller.getAddOtherDiseaseList.length,
                         itemBuilder: (BuildContext ctx, index) {
-                          SuggestedUnlocalizedProblemDataModal allProblems=modal.controller.getSuggestedProblemList[index];
+                          //AddAnyOtherDiseaseDataModal diseaseData =modal.controller.getAddOtherDiseaseList[index];
                           return InkWell(
                             onTap: (){
                               setState(() {
-                                modal.onSuggestProblemTap(index);
-                                modal.controller.searchC.value.clear();
+                                modal.onTapDisease(index);
                               });
                             },
                             child: Container(
                                 padding: const EdgeInsets.all(6),
                                 decoration: BoxDecoration(
-                                  color: modal.controller.unlocalizedProblemId.contains(allProblems.id)?Colors.lightGreen:Colors.yellow.shade50,
-                                  // color: Colors.yellow.shade50,
+                                  color: modal.controller.diseaseSufferedId.contains(modal.controller.getAddOtherDiseaseList[index]['id'])?Colors.lightGreen:Colors.yellow.shade50,
                                   borderRadius: BorderRadius.circular(5),
                                   boxShadow:  [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
+                                    BoxShadow(color: Colors.grey.withOpacity(0.5),
                                       blurRadius: 2,
                                       blurStyle: BlurStyle.solid,
-                                      offset: Offset(1.0,1.0),
-                                    ),
+                                      offset: const Offset(1.0,1.0),)
                                   ],
                                 ),
                                 child: Text(
-                                  allProblems.problemName.toString(),
+                                  modal.controller.getAddOtherDiseaseList[index]['problemName'].toString(),
                                   style:
                                   MyTextTheme().smallBCN.copyWith(fontSize: 12),
+                                  overflow: TextOverflow.ellipsis,
                                 )),
                           );
-                        })
-
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                child: Text("Add any other disease you suffered from",
-                    style: MyTextTheme().mediumBCB),
-              ),
-              MyTextField2(
-                hintText: "Search disease",
-                suffixIcon:
-                const Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(Icons.search, color: Colors.grey, size: 25),
-                ),
-                controller: modal.controller.diseaseSearchC.value,
-                onChanged: (val){
-                  setState(() {
-
-                  });
-                },
-              ),
-              Expanded(
-                child: GridView.builder(
-                    gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 7 / 2,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5),
-                    padding: const EdgeInsets.only(top: 15, left: 1, right: 5),
-                    itemCount: modal.controller.getAddOtherDiseaseList.length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      AddAnyOtherDiseaseDataModal diseaseData =modal.controller.getAddOtherDiseaseList[index];
-                      return InkWell(
-                        onTap: (){
-                          setState(() {
-                            modal.onTapDisease(index);
-                          });
-                        },
-                        child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: modal.controller.diseaseSufferedId.contains(diseaseData.id)?Colors.lightGreen:Colors.yellow.shade50,
-                              borderRadius: BorderRadius.circular(5),
-                              boxShadow:  [
-                                BoxShadow(color: Colors.grey.withOpacity(0.5),
-                                  blurRadius: 2,
-                                  blurStyle: BlurStyle.solid,
-                                  offset: Offset(1.0,1.0),)
-                              ],
+                        }),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8,top: 15),
+                      child: Container(
+                        width: 80,
+                        padding: const EdgeInsets.fromLTRB(6, 6, 10, 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: AppColor().grey),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.keyboard_backspace_outlined,
+                                color: AppColor().grey),
+                            const SizedBox(
+                              width: 10,
                             ),
-                            child: Text(
-                              diseaseData.problemName.toString(),
-                              style:
-                              MyTextTheme().smallBCN.copyWith(fontSize: 12),
-                              overflow: TextOverflow.ellipsis,
-                            )),
-                      );
-                    }),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8,top: 15),
-                  child: Container(
-                    width: 80,
-                    padding: const EdgeInsets.fromLTRB(6, 6, 10, 6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: AppColor().grey),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.keyboard_backspace_outlined,
-                            color: AppColor().grey),
-                        const SizedBox(
-                          width: 10,
+                            Text(
+                              "Back",
+                              style: MyTextTheme().smallGCN,
+                            ),
+                          ],
                         ),
-                        Text(
-                          "Back",
-                          style: MyTextTheme().smallGCN,
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,)
+                ],
               ),
-              const SizedBox(
-                height: 10,)
+              Positioned(top: 125,left:1,
+                  child: AnimatedContainer(
+                    height:modal.controller.getSuggestedSearchList.isEmpty || modal.controller.searchC.value.text == ""?0: 170,
+                    width:400,
+                    color: AppColor().white,
+                    duration: const Duration(milliseconds: 300),
+                    child: ListView.builder(itemBuilder: (BuildContext context, int index){
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                        child: InkWell(onTap:(){
+                          setState(() {
+                            // modal.controller.suggestedProblemList.add( modal.controller.getSuggestedSearchList[index].problemName.toString());
+                            // modal.controller.update();
+                          });
+                        },child: Text( modal.controller.getSuggestedSearchList[index].problemName.toString())),
+                      );
+                    },
+                    itemCount:modal.controller.getSuggestedSearchList.length,),
+                  )
+              ),
+
+
+              Positioned(
+                bottom: 78,left: 1,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    height:modal.controller.getDiseaseSearchList.isEmpty || modal.controller.diseaseSearchC.value.text == ""?0: 170,
+                    width: 400,
+                    color: AppColor().white,
+                    child: ListView.builder(itemBuilder: (BuildContext context, int index){
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                        child: Text( modal.controller.getDiseaseSearchList[index].problemName.toString()),
+                      );
+                    },
+                      itemCount:modal.controller.getDiseaseSearchList.length,),
+                  ))
             ],
           ),
         );

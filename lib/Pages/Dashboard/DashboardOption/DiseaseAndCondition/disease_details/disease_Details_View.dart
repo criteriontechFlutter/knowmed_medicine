@@ -7,7 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:knowmed/AppManager/common_widgets.dart';
 import 'package:knowmed/AppManager/hex_color_extention.dart';
+import 'package:knowmed/AppManager/my_custom_sd.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_Data_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_and_condition_Modal.dart';
 import 'package:knowmed/Pages/Dashboard/DashboardOption/DiseaseAndCondition/disease_details/disease_Details_Controller.dart';
@@ -96,229 +98,249 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
           body: GetBuilder(
               init: DiseaseDetailsController(),
               builder: (_) {
-                return ScrollablePositionedList.builder(
-                    itemScrollController: _scrollController1,
-                    //controller:  _controller,
-                    itemCount: modal.controller.getMedicineDetailsList.length,
-                    itemBuilder: (context, index3) {
-                      DiseaseDetailsDataModal modaldata =
+                return Center(
+                  child: CommonWidgets().showNoData(
+                    title: 'Medicine List Data Not Found',
+                    show: (modal.controller.getShowNoData &&
+                        modal.controller.getMedicineDetailsList.isEmpty),
+                    loaderTitle: 'Loading Medicine List',
+                    showLoader: (!modal.controller.getShowNoData &&
+                        modal.controller.getMedicineDetailsList.isNotEmpty),
+                    child: ScrollablePositionedList.builder(
+                        itemScrollController: _scrollController1,
+                        //controller:  _controller,
+                        itemCount: modal.controller.getMedicineDetailsList.length,
+                        itemBuilder: (context, index3) {
+                          DiseaseDetailsDataModal modaldata =
                           modal.controller.getMedicineDetailsList[index3];
-                      DiseaseDataModal medicineData = disease_Modal
-                          .controller.getDiseaseAlphabet[widget.index];
-                      return Column(
-                        children: [
-                          SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Padding(
+                          DiseaseDataModal medicineData = disease_Modal
+                              .controller.getDiseaseAlphabet[widget.index];
+                          return Column(
+                            children: [
+                              SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Text(modal.controller.getMedicineDetailsList[1].body[0]['departmentName'].toString()),
+                                    // MyCustomSD(
+                                    //     listToSearch: modal.controller.diseaseDetailsList,
+                                    //     valFrom: 'departmentName',
+                                    //     onChanged: (val){
+                                    //       if(val!=null){
+                                    //
+                                    //       }
+                                    //     }),
+
+                                    Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey),
+                                            borderRadius:
+                                            BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
                                             MainAxisAlignment.start,
-                                        crossAxisAlignment:
+                                            crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
-                                          index3 == 0
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                    4,
-                                                    0,
-                                                    0,
-                                                    2,
-                                                  ),
-                                                  child: Text(
-                                                    medicineData.problemName
-                                                        .toString(),
-                                                    style:
-                                                        MyTextTheme().mediumBCB,
-                                                  ),
-                                                )
-                                              : const SizedBox(),
-                                          //index3 == 0?SizedBox(height: 2,):SizedBox(),
-                                          index3 == 0
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          4, 0, 0, 8),
-                                                  child: Text(
-                                                    'Know your medicine for better treatment',
-                                                    style:
-                                                        MyTextTheme().mediumBCN,
-                                                  ),
-                                                )
-                                              : const SizedBox(),
-                                          Wrap(
                                             children: [
-                                              Image.asset(
-                                                "assets/" +
-                                                    modaldata.heading
-                                                        .toString() +
-                                                    ".png",
-                                                height: 20,
-                                                width: 20,
-                                                color: Colors.blue,
-                                              ),
-                                              const SizedBox(
-                                                width: 8,
-                                              ),
-                                              Text(
-                                                modaldata.heading.toString(),
-                                                style: MyTextTheme()
-                                                    .mediumBCB
-                                                    .copyWith(
+                                              index3 == 0
+                                                  ? Padding(
+                                                padding:
+                                                const EdgeInsets.fromLTRB(
+                                                  4,
+                                                  0,
+                                                  0,
+                                                  2,
+                                                ),
+                                                child: Text(
+                                                  medicineData.problemName
+                                                      .toString(),
+                                                  style:
+                                                  MyTextTheme().mediumBCB,
+                                                ),
+                                              )
+                                                  : const SizedBox(),
+                                              //index3 == 0?SizedBox(height: 2,):SizedBox(),
+                                              index3 == 0
+                                                  ? Padding(
+                                                padding:
+                                                const EdgeInsets.fromLTRB(
+                                                    4, 0, 0, 8),
+                                                child: Text(
+                                                  'Know your medicine for better treatment',
+                                                  style:
+                                                  MyTextTheme().mediumBCN,
+                                                ),
+                                              )
+                                                  : const SizedBox(),
+                                              Wrap(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/" +
+                                                        modaldata.heading
+                                                            .toString() +
+                                                        ".png",
+                                                    height: 20,
+                                                    width: 20,
+                                                    color: Colors.blue,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text(
+                                                    modaldata.heading.toString(),
+                                                    style: MyTextTheme()
+                                                        .mediumBCB
+                                                        .copyWith(
                                                         color: Colors.blue),
+                                                  ),
+
+                                                ],
                                               ),
 
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              _getWidgetAccordingToType(modaldata),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+
+                                              // Row(
+                                              //   crossAxisAlignment:
+                                              //       CrossAxisAlignment.start,
+                                              //   //mainAxisAlignment: MainAxisAlignment.start,
+                                              //   children: [
+                                              //     // Visibility(
+                                              //     //     visible: (modaldata
+                                              //     //         .reference??'')!='',
+                                              //     //     child: Column(
+                                              //     //       children: [
+                                              //     //         const SizedBox(
+                                              //     //           height: 8,
+                                              //     //         ),
+                                              //     //         Text(
+                                              //     //           'Ref:',
+                                              //     //           style: MyTextTheme()
+                                              //     //               .mediumBCB,
+                                              //     //         ),
+                                              //     //       ],
+                                              //     //     )),
+                                              //     // Expanded(
+                                              //     //     child: Html(
+                                              //     //   data: modaldata.reference
+                                              //     //       .toString(),
+                                              //     // )),
+                                              //   ],
+                                              // ),
                                             ],
                                           ),
-
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          _getWidgetAccordingToType(modaldata),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-
-                                          // Row(
-                                          //   crossAxisAlignment:
-                                          //       CrossAxisAlignment.start,
-                                          //   //mainAxisAlignment: MainAxisAlignment.start,
-                                          //   children: [
-                                          //     // Visibility(
-                                          //     //     visible: (modaldata
-                                          //     //         .reference??'')!='',
-                                          //     //     child: Column(
-                                          //     //       children: [
-                                          //     //         const SizedBox(
-                                          //     //           height: 8,
-                                          //     //         ),
-                                          //     //         Text(
-                                          //     //           'Ref:',
-                                          //     //           style: MyTextTheme()
-                                          //     //               .mediumBCB,
-                                          //     //         ),
-                                          //     //       ],
-                                          //     //     )),
-                                          //     // Expanded(
-                                          //     //     child: Html(
-                                          //     //   data: modaldata.reference
-                                          //     //       .toString(),
-                                          //     // )),
-                                          //   ],
-                                          // ),
-                                        ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
+                                    Padding(
+                                      padding:
                                       const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Visibility(
-                                    visible: index3 == 0 ? true : false,
-                                    child: Wrap(
-                                      children: List.generate(
-                                          modal
-                                              .controller
-                                              .getMedicineDetailsList
-                                              .length, (index2) {
-                                        return InkWell(
-                                          onTap: () {
-                                            _scrollController1.scrollTo(
-                                                index: index2,
-                                                duration: const Duration(
-                                                    milliseconds: 500));
-                                          },
-                                          child: modal
-                                                      .controller
-                                                      .getMedicineDetailsList[
-                                                          index2]
-                                                      .heading
-                                                      .toString() ==
+                                      child: Visibility(
+                                        visible: index3 == 0 ? true : false,
+                                        child: Wrap(
+                                          children: List.generate(
+                                              modal
+                                                  .controller
+                                                  .getMedicineDetailsList
+                                                  .length, (index2) {
+                                            return InkWell(
+                                              onTap: () {
+                                                _scrollController1.scrollTo(
+                                                    index: index2,
+                                                    duration: const Duration(
+                                                        milliseconds: 500));
+                                              },
+                                              child: modal
+                                                  .controller
+                                                  .getMedicineDetailsList[
+                                              index2]
+                                                  .heading
+                                                  .toString() ==
                                                   "Overview"
-                                              ? const Text("")
-                                              : Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          3, 4, 4, 3),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      color: AppColor().blue,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    child: RichText(
-                                                        text:
-                                                            TextSpan(children: [
-                                                      WidgetSpan(
-                                                          child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .fromLTRB(
-                                                                          8,
-                                                                          0,
-                                                                          2,
-                                                                          3),
-                                                              child:
-                                                                  Image.asset(
-                                                                "assets/" +
-                                                                    modal
-                                                                        .controller
-                                                                        .getMedicineDetailsList[
-                                                                            index2]
-                                                                        .heading
-                                                                        .toString() +
-                                                                    ".png",
-                                                                height: 20,
-                                                                width: 20,
-                                                                color: Colors
-                                                                    .white,
-                                                              ))),
-                                                      WidgetSpan(
-                                                          child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                3, 5, 5, 7),
-                                                        child: Text(
-                                                          modal
-                                                              .controller
-                                                              .getMedicineDetailsList[
-                                                                  index2]
-                                                              .heading
-                                                              .toString(),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: MyTextTheme()
-                                                              .smallWCB,
-                                                        ),
-                                                      )),
-                                                    ])),
+                                                  ? const Text("")
+                                                  : Padding(
+                                                padding:
+                                                const EdgeInsets.fromLTRB(
+                                                    3, 4, 4, 3),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: AppColor().blue,
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
                                                   ),
+                                                  child: RichText(
+                                                      text:
+                                                      TextSpan(children: [
+                                                        WidgetSpan(
+                                                            child: Padding(
+                                                                padding:
+                                                                const EdgeInsets
+                                                                    .fromLTRB(
+                                                                    8,
+                                                                    0,
+                                                                    2,
+                                                                    3),
+                                                                child:
+                                                                Image.asset(
+                                                                  "assets/" +
+                                                                      modal
+                                                                          .controller
+                                                                          .getMedicineDetailsList[
+                                                                      index2]
+                                                                          .heading
+                                                                          .toString() +
+                                                                      ".png",
+                                                                  height: 20,
+                                                                  width: 20,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ))),
+                                                        WidgetSpan(
+                                                            child: Padding(
+                                                              padding:
+                                                              const EdgeInsets
+                                                                  .fromLTRB(
+                                                                  3, 5, 5, 7),
+                                                              child: Text(
+                                                                modal
+                                                                    .controller
+                                                                    .getMedicineDetailsList[
+                                                                index2]
+                                                                    .heading
+                                                                    .toString(),
+                                                                textAlign:
+                                                                TextAlign.center,
+                                                                style: MyTextTheme()
+                                                                    .smallWCB,
+                                                              ),
+                                                            )),
+                                                      ])),
                                                 ),
-                                        );
-                                      }),
+                                              ),
+                                            );
+                                          }),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    });
+                              ),
+                            ],
+                          );
+                        }),
+                  ),
+                );
               }),
         ),
       ),
@@ -357,14 +379,18 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                             children: [
                               Column(
                                 children: List.generate(overview.subOverview!.length, (index){
-                                  var subOverview=overview.subOverview![index2];
+                                  var subOverview=overview.subOverview![index];
                                   return Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        CircleAvatar(
-                                          backgroundColor: AppColor().black,
-                                          radius: 2,
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 15.0),
+                                          child: CircleAvatar(
+                                            backgroundColor: AppColor().black,
+                                            radius: 2,
+                                          ),
                                         ),
                                     Expanded(child: Html(data:subOverview.subOverview.toString()))
                                       ],
@@ -407,16 +433,17 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                             var concern =
                                 newData.concern![index2].data![index3];
                             return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  radius: 2,
-                                  backgroundColor: AppColor().black,
-                                ),
-                                const SizedBox(
-                                  width: 5,
+                                Padding(
+                                  padding: const EdgeInsets.only(top:15),
+                                  child: CircleAvatar(
+                                    radius: 2,
+                                    backgroundColor: AppColor().black,
+                                  ),
                                 ),
                                 Expanded(
-                                    child: Text(concern.problemName.toString(),style: MyTextTheme().smallBCN,)),
+                                    child: Html(data:concern.problemName.toString(),)),
                               ],
                             );
                           }),
@@ -454,9 +481,9 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Test",style: MyTextTheme().smallBCN,),
-                                  Text("Subtest",style: MyTextTheme().smallBCN),
-                                  Text("Property",style: MyTextTheme().smallBCN),
+                                 // Text("Test",style: MyTextTheme().smallBCN,),
+                                  Text("Test",style: MyTextTheme().smallBCN),
+                                  //Text("Property",style: MyTextTheme().smallBCN),
                                   Text("Result",style: MyTextTheme().smallBCN)
                                 ],
                               ),
@@ -475,9 +502,9 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                   child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(child: Text(daigonasticData.testName.toString(),style: MyTextTheme().smallBCN)),
+                                  //  Expanded(child: Text(daigonasticData.testName.toString(),style: MyTextTheme().smallBCN)),
                                   Expanded(child: Text(daigonasticData.subTestName.toString(),style: MyTextTheme().smallBCN)),
-                                  Expanded(child: Text(daigonasticData.propertyValue.toString(),style: MyTextTheme().smallBCN)),
+                                 // Expanded(child: Text(daigonasticData.propertyValue.toString(),style: MyTextTheme().smallBCN)),
                                   Expanded(child: Text(daigonasticData.remarkValue.toString(),style: MyTextTheme().smallBCN)),
                                   ],
                                   ),
@@ -486,7 +513,6 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                                 );
 
                               }),
-
                         ),
                             ],
                           );
@@ -574,8 +600,9 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
                         return
                           Column(
                             children: List.generate(
-                                (newData.data![index2].precautionType?? []).length, (index3) {
-                              var concernsData = newData.data![index2].precautionType![index3];
+                                (newData.data![index2].concernType?? []).length, (index3) {
+                              var concernsData = newData.data![index2].concernType![index3];
+                              print("hello"+concernsData.concernType.toString());
                               return Column(
                                 children: [
                                   Row(
@@ -726,59 +753,237 @@ class _DiseaseDetailsState extends State<DiseaseDetails> {
               );
             }),
           );
-        // case 30:
-        //   List<EpidemiologyDataModal> epidemiology =
-        //   List<EpidemiologyDataModal>.from((data).map(
-        //           (element) => EpidemiologyDataModal.fromJson(element)));
-        //   return Column(
-        //     children: List.generate(epidemiology.length, (index) {
-        //       var newData = epidemiology[index];
-        //       return Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           Text(
-        //             newData.subHeading.toString(),
-        //             style: MyTextTheme().smallBCB,
-        //           ),
-        //           Padding(
-        //             padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
-        //             child: Column(
-        //               children:
-        //               List.generate(newData.data!.length, (index2) {
-        //                 return
-        //                   Column(
-        //                     children: List.generate(
-        //                         (newData.data![index2].precautionType?? []).length, (index3) {
-        //                       var concernsData = newData.data![index2].precautionType![index3];
-        //                       return Column(
-        //                         children: [
-        //                           Row(
-        //                             crossAxisAlignment: CrossAxisAlignment.start,
-        //                             children: [
-        //                               Padding(
-        //                                 padding: const EdgeInsets.fromLTRB(0,4,5,0),
-        //                                 child: CircleAvatar(
-        //                                   radius: 2,
-        //                                   backgroundColor: AppColor().black,
-        //                                 ),
-        //                               ),
-        //                               Expanded(child: Text(concernsData.concernType.toString(),style: MyTextTheme().smallBCN,))
-        //                             ],
-        //                           )
-        //
-        //                         ],
-        //                       );
-        //
-        //                     }),
-        //
-        //                   );
-        //               }),
-        //             ),
-        //           ),
-        //         ],
-        //       );
-        //     }),
-        //   );
+
+        case 29:
+          List<MetabolicPathwayDataModal> Metabolic =
+          List<MetabolicPathwayDataModal>.from((data).map(
+                  (element) => MetabolicPathwayDataModal.fromJson(element)));
+          return Column(
+            children: List.generate(Metabolic.length, (index) {
+              var newData = Metabolic[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.subHeading.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.data!.length, (index2) {
+                        return
+                          Column(
+                            children: List.generate(
+                                (newData.data![index2].metabolicPathway?? []).length, (index3) {
+                              var metabolicData = newData.data![index2].metabolicPathway![index3];
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8,bottom: 5),
+                                child:
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Metabolism Name: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.metabolismName.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Cycle Name: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.cycleName.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Enzyme Name: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.enzymeName.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Metabolite Name: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.metabolismName.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Disorder Description: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.disorderDescription.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Test Details: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.testDetails.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child:
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 8.0),
+                                            child: Text("Treatment Details: ",style: MyTextTheme().smallBCB,),
+                                          ),
+                                          Expanded(child: Html(data:metabolicData.treatmentDetails.toString(),))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Tissue: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.tissue.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Bio Fluids: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.biofluids.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Cell Location: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.cellLocation.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Inheritance: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.inheretance.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Prevalence: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.prevalence.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Fate: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.fate.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5.0),
+                                      child: Row(
+                                        children: [
+                                          Text("Feeder: ",style: MyTextTheme().smallBCB,),
+                                          Expanded(child: Text(metabolicData.feeder.toString(),style: MyTextTheme().smallBCN,))
+                                        ],
+                                      ),
+                                    ),
+
+
+                                  ],
+                                ),
+                              );
+
+                            }),
+
+                          );
+                      }),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          );
+        case 30:
+          List<EpidemiologyDataModal> epidemiology =
+          List<EpidemiologyDataModal>.from((data).map(
+                  (element) => EpidemiologyDataModal.fromJson(element)));
+          return Column(
+            children: List.generate(epidemiology.length, (index) {
+              var newData = epidemiology[index];
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    newData.subHeading.toString(),
+                    style: MyTextTheme().smallBCB,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 8),
+                    child: Column(
+                      children:
+                      List.generate(newData.data!.length, (index2) {
+                        return
+                          Column(
+                            children: List.generate(
+                                (newData.data![index2].prognosis?? []).length, (index3) {
+                              var epidemiologyData = newData.data![index2].prognosis![index3];
+                              return Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(0,4,5,0),
+                                        child: CircleAvatar(
+                                          radius: 2,
+                                          backgroundColor: AppColor().black,
+                                        ),
+                                      ),
+                                      Expanded(child: Text(epidemiologyData.prognosis.toString(),style: MyTextTheme().smallBCN,))
+                                    ],
+                                  )
+
+                                ],
+                              );
+
+                            }),
+
+                          );
+                      }),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          );
         default:
           return Container();
       }

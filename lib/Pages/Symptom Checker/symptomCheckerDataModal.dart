@@ -22,20 +22,23 @@ class SymptomCheckerDataModal {
 
 
 
+
+
+
 //All symptoms by Alfhabet Data modal
 
 
 
 
-class SuggestedUnlocalizedProblemDataModal {
+class SymptomRelatedBodyPartDataModal {
   String? id;
   String? problemName;
   String? isVisible;
 
-  SuggestedUnlocalizedProblemDataModal(
+  SymptomRelatedBodyPartDataModal(
       {this.id, this.problemName, this.isVisible});
 
-  SuggestedUnlocalizedProblemDataModal.fromJson(Map<String, dynamic> json) {
+  SymptomRelatedBodyPartDataModal.fromJson(Map<String, dynamic> json) {
     id = (json['id']??'').toString();
     problemName = json['problemName'];
     isVisible = json['isVisible'];
@@ -49,6 +52,30 @@ class SuggestedUnlocalizedProblemDataModal {
     return data;
   }
 }
+
+
+//  Suggested unlocalized problem data modal
+
+class SuggestedUnlocalizedProblemDataModal {
+  int? id;
+  String? problemName;
+
+  SuggestedUnlocalizedProblemDataModal({this.id, this.problemName});
+
+  SuggestedUnlocalizedProblemDataModal.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    problemName = json['problemName'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['problemName'] = this.problemName;
+    return data;
+  }
+}
+
+
 
 // Add Any Other Disease you Suffered from DataModal
 

@@ -93,15 +93,19 @@ class SymptomCheckerController extends GetxController{
   // ).where((element) => (element.problemName!.toLowerCase().contains(searchC.value.text.toLowerCase()))).toList();
 
 
-  List<SuggestedUnlocalizedProblemDataModal> get getAllSymptomsList=>List<SuggestedUnlocalizedProblemDataModal>.from(
-      (
-          (searchC.value.text==''?allSymptomsList:allSymptomsList.where((element) =>
-              (
-                  element['problemName'].toString().toLowerCase()
-              ).trim().contains(searchC.value.text.toLowerCase().trim())
-          ))
-              .map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
-      ));
+  // List<SymptomRelatedBodyPartDataModal> get getAllSymptomsList=>List<SymptomRelatedBodyPartDataModal>.from(
+  //     (
+  //         (searchC.value.text==''?allSymptomsList:allSymptomsList.where((element) =>
+  //             (
+  //                 element['problemName'].toString().toLowerCase()
+  //             ).trim().contains(searchC.value.text.toLowerCase().trim())
+  //         ))
+  //             .map((element) => SymptomRelatedBodyPartDataModal.fromJson(element))
+  //     ));
+
+  List<SymptomRelatedBodyPartDataModal> get getAllSymptomsList=>List <SymptomRelatedBodyPartDataModal>.from(
+      allSymptomsList.map((element) => SymptomRelatedBodyPartDataModal.fromJson(element))
+  );
 
   // List get getAllSymptomsList =>allSymptomsList;
   set updateAllSymptomsList(List val){
@@ -133,17 +137,9 @@ class SymptomCheckerController extends GetxController{
     update();
   }
 
-  Rx<TextEditingController> searchC = TextEditingController().obs;
+
   List suggestedProblemList=[].obs;
-
-
-  List<SuggestedUnlocalizedProblemDataModal> get getSuggestedProblemList=>searchC.value.text==''?List<SuggestedUnlocalizedProblemDataModal>.from(
-      suggestedProblemList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
-  ):List<SuggestedUnlocalizedProblemDataModal>.from(
-      suggestedProblemList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
-  ).where((element) => (element.problemName!.toLowerCase().contains(searchC.value.text.toLowerCase()))).toList();
-
-  // List get getSuggestedProblemList=>suggestedProblemList;
+   List get getSuggestedProblemList=>suggestedProblemList;
 
   set updateSuggestedProblemList(List val){
     suggestedProblemList=val;
@@ -153,24 +149,50 @@ class SymptomCheckerController extends GetxController{
   List unlocalizedProblemId = [];
 
 
+  //for search & add problems
+
+  Rx<TextEditingController> searchC = TextEditingController().obs;
+  List suggestedSearchList=[].obs;
+  List<SuggestedUnlocalizedProblemDataModal> get getSuggestedSearchList=>searchC.value.text==''?List<SuggestedUnlocalizedProblemDataModal>.from(
+      suggestedSearchList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
+  ):List<SuggestedUnlocalizedProblemDataModal>.from(
+      suggestedSearchList.map((element) => SuggestedUnlocalizedProblemDataModal.fromJson(element))
+  ).where((element) => (element.problemName!.toLowerCase().contains(searchC.value.text.toLowerCase()))).toList();
+
+  set updateSuggestedSearchList(List val){
+    suggestedSearchList=val;
+    update();
+  }
 
 
 
 
-  Rx<TextEditingController> diseaseSearchC = TextEditingController().obs;
+
   List addOtherDiseaseList=[].obs;
-
-  List<AddAnyOtherDiseaseDataModal> get getAddOtherDiseaseList=>diseaseSearchC.value.text==''?List<AddAnyOtherDiseaseDataModal>.from(
-      addOtherDiseaseList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
-  ):List<AddAnyOtherDiseaseDataModal>.from(
-      addOtherDiseaseList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
-  ).where((element) => (element.problemName!.toLowerCase().contains(diseaseSearchC.value.text.toLowerCase()))).toList();
-
+  List get getAddOtherDiseaseList=>addOtherDiseaseList;
   set updateAddOtherDiseaseList(List val){
     addOtherDiseaseList=val;
     update();
   }
 
   List diseaseSufferedId=[];
+
+
+// for search & Disease
+
+List diseaseSearchList=[].obs;
+  Rx<TextEditingController> diseaseSearchC = TextEditingController().obs;
+
+List<AddAnyOtherDiseaseDataModal> get getDiseaseSearchList=>diseaseSearchC.value.text==''?List<AddAnyOtherDiseaseDataModal>.from(
+    diseaseSearchList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
+):List<AddAnyOtherDiseaseDataModal>.from(
+    diseaseSearchList.map((element) => AddAnyOtherDiseaseDataModal.fromJson(element))
+).where((element) => (element.problemName!.toLowerCase().contains(diseaseSearchC.value.text.toLowerCase()))).toList();
+
+set updateDiseaseSearchList(List val){
+  diseaseSearchList=val;
+  update();
+}
+
 
 }

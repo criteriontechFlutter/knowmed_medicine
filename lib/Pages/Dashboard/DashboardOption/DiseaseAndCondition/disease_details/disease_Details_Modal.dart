@@ -16,18 +16,21 @@ class DiseaseDetailsModal{
   RawData rawData=RawData();
 
   diseaseDetails(context, int index)async{
+    controller.updateShowNoData=false;
 
     var body={
       "userId":UserData().getUserData.id.toString(),
-    // "departmentId":controller2.getDiseaseAlphabet[index].id.toString(),
-     "problemId":controller2.getDiseaseAlphabet[index].id.toString()
-     //  "departmentId":"9",
-     //  "problemId":"222",
+     //"departmentId":controller2.getDiseaseAlphabet[index].id.toString(),
+    "problemId":controller2.getDiseaseAlphabet[index].id.toString(),
+      //"departmentId":"15",
+       //"problemId":"7149",
      //  "userId":"120",
 
     };
 
     var data=await rawData.api('Knowmed/diseaseReport', body, context);
+    print("department id: " +  controller2.getDiseaseAlphabet[index].id.toString(),);
+    controller.updateShowNoData=true;
     log('qqqqqqqqqqqqqqqqqqqqqqqqqq'+data.toString());
     controller.updateDiseaseDetailsList=data['responseValue'];
   }
